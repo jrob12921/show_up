@@ -1,34 +1,103 @@
 <%= form_tag("/", method: "get") do %>
-  <%= label_tag(:q_artist_name, "Search Artist:") %>
+  <%= label_tag(:q_artist_name, "Search Artist by Name:") %>
   <%= text_field_tag(:q_artist_name) %>
   <%= submit_tag("Go!") %>
 <% end %>
+
+<br>
 
 <%= form_tag("/", method: "get") do %>
   <%= label_tag(:q_venue_name, "Search Venue by Name:") %>
-  <%= text_field_tag(:q_artist_name) %>
+  <%= text_field_tag(:q_venue_name) %>
   <%= submit_tag("Go!") %>
 <% end %>
+
+<br>
 
 <%= form_tag("/", method: "get") do %>
   <%= label_tag(:q_venue_zipCode, "Search Venue by Zip Code:") %>
-  <%= text_field_tag(:q_artist_zipCode) %>
+  <%= text_field_tag(:q_venue_zipCode) %>
   <%= submit_tag("Go!") %>
 <% end %>
 
-<% if @artist_name_results.present? %>
+<br>
 
-ARTIST: <%= params[:q_artist_name] %>
+<%= form_tag("/", method: "get") do %>
+  <%= label_tag("Search Event by Zip Code And/Or Date:") %>
+
+  <%= label_tag(:q_event_zipCode, "Zip Code:") %>
+  <%= text_field_tag(:q_event_zipCode) %>
+
+  <%= label_tag(:q_event_radius, "Radius (in Miles):") %>
+  <%= text_field_tag(:q_event_radius) %>
+
+  <%= label_tag(:q_event_startDate, "Start Date:") %>
+  <%= date_field_tag(:q_event_startDate, :value => Time.now.strftime('%Y-%m-%d'), :min => Date.today) %>
+
+  <%= label_tag(:q_event_endDate, "End Date Code:") %>
+  <%= date_field_tag(:q_event_endDate, :value => Time.now.strftime('%Y-%m-%d')) %>
+
+  <%= submit_tag("Go!") %>
+<% end %>
+
+<br>
+
+
+
+<!-- Display Artist Results -->
+<% if @artist_results.present? %>
+
+ARTIST: <%= @artist_name %>
 <br>
 NAMES: 
   <ol>  
-    <% @artist_name_results.each do |n| %>
-      <li><%= n %></li>
+    <% @artist_results.each do |a| %>
+      <li><%= a[:artist_name] %></li>
     <% end %>
   </ol>
 
 <% end %>
 
+<!-- Display Venue Results -->
+<% if @venue_results.present? %>
+
+Venue: <%= @venue_name %>
+<br>
+NAMES: 
+  <ol>  
+    <% @venue_results.each do |v| %>
+      <li><%= v[:venue_name] %></li>
+    <% end %>
+  </ol>
+
+<% end %>
+
+<!-- Display Event Information -->
+<% if @event_results.present? %>
+
+Events:
+  <ol>
+    <%= @event_results.each do |e| %>
+      <li>
+        <ul>
+          <li>Event Date: <%= e[:event_date] %></li>
+          <li>Event Venue: <%= e[:event_venue] %></li>
+          <li>Event Artists:
+            <ol>
+              <% e[:event_artists].each do |a| %>
+                <li><% a['Name'] %></li>
+              <% end %>
+            </ol>
+          </li>
+          <li><%= link_to("Buy Tickets", "#{e[:event_url]}") %></li>
+        </ul>
+      </li>
+    <% end %>
+  </ol>
+
+<% end %>
+
+<!-- User Information from Facebook -->
 <% if user_signed_in? %>
 
 <ul>
@@ -40,3 +109,7 @@ NAMES:
 </ul>
 
 <% end %>
+
+<!-- JamBase Attribution -->
+<a href="http://www.JamBase.com" target="_top" title="JamBase Concert Search">
+<img src= "http://images.jambase.com/logos/jambase140x70.gif" alt="Search JamBase Concerts" border="0" /></a>

@@ -8,7 +8,8 @@ class Search
 
     if artist_name.present?
       for i in 0...artist_search['Artists'].length
-        artist_names << artist_search['Artists'][i]['Name']
+        artist = artist_search['Artists'][i]
+        artist_names << {artist_id: artist['Id'], artist_name: artist['Name']}
       end
     end
 
@@ -23,7 +24,8 @@ class Search
 
     if venue_name.present?
       for i in 0...venue_search['Venues'].length
-        venue_names << venue_search['Venues'][i]['Name']
+        venue = venue_search['Venues'][i]
+        venue_names << {venue_id: venue['Id'], venue_name: venue['Name']}
       end
     end
 
@@ -36,18 +38,43 @@ class Search
 
     venue_names = []
 
-    if venue_name.present?
+    if venue_zipCode.present?
       for i in 0...venue_search['Venues'].length
-        venue_names << venue_search['Venues'][i]['Name']
+        venue = venue_search['Venues'][i]
+        venue_names << {venue_id: venue['Id'], venue_name: venue['Name']}
       end
     end
 
     venue_names
   end
 
+  def search_event_by_location_and_date(zipCode, radius, startDate, endDate)
 
+    url = "http://api.jambase.com/events?"
 
+    url += "zipCode=#{zipCode}&" if zipCode.present?
 
+    url += "radius=#{radius}&" if radius.present?
+    # yyyy-mm-dd
+    url += "startDate=#{startDate}&" if startDate.present?
+
+    url+= "endDate=#{endDate}&" if endDate.present?
+
+    url += "page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json"
+
+    event_search = HTTParty.get(url, verify: false).parsed_response
+
+    events = []
+
+    if zipCode.present? || startDate.present?
+      for i in 0...event_search['Events'].length
+        event = event_search['Events'][i]
+        events << {event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
+      end
+    end
+
+    events
+  end
 
 
 

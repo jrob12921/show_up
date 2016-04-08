@@ -5,40 +5,24 @@ class HomeController < ApplicationController
   def index
 
     @user = User.find(current_user.id) if user_signed_in? 
-    
-    # Artist Search by name
-    @artist = params[:q_artist_name]
 
-    @artist_name_results = ::Search.new.search_artist_by_name(@artist)
+    # Artist Search variables
+    @artist_name = params[:q_artist_name]
+    @artist_results = ::Search.new.search_artist_by_name(@artist_name)
 
+    # Venue Search variables
+    @venue_name = params[:q_venue_name]
+    @venue_zipCode = params[:q_venue_zipCode]
 
+    @venue_name.present? ? @venue_results = ::Search.new.search_venue_by_name(@venue_name) : @venue_results = ::Search.new.search_venue_by_zipCode(@venue_zipCode)
 
-    # # Venue Search
-    # @venue = params[:q_venue]
+    # Event Search variables
+    @event_zipCode = params[:q_event_zipCode]
+    @event_radius = params[:q_event_radius]
+    @event_startDate = params[:q_event_startDate]
+    @event_endDate = params[:q_event_endDate]
 
-    # @venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{@venue}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
-
-    # @venue_names = []
-
-    # if @venue.present?
-    #   for i in 0...@venue_search['Venues'].length
-    #     @venue_names << @venue_search['Venues'][i]['Name']
-    #   end
-    # end
-
-    # # Event Search
-    # @event = params[:q_event]
-
-    # @event_search = HTTParty.get("http://api.jambase.com/artists?name=#{@event}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
-
-    # @event_names = []
-
-    # if @event.present?
-    #   for i in 0...@event_search['Events'].length
-    #     @event_names << @event_search['Events'][i]['Name']
-    #   end
-    # end
-
+    @event_results = ::Search.new.search_event_by_location_and_date(@event_zipCode, @event_radius, @event_startDate, @event_endDate)
 
 
 
