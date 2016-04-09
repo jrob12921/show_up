@@ -32,10 +32,10 @@
   <%= text_field_tag(:q_event_radius) %>
 
   <%= label_tag(:q_event_startDate, "Start Date:") %>
-  <%= date_field_tag(:q_event_startDate, :value => Time.now.strftime('%Y-%m-%d'), :min => Date.today) %>
+  <%= date_field(:q_event_startDate, :value => Time.now.strftime('%Y-%m-%d'), :min => Date.today) %>
 
   <%= label_tag(:q_event_endDate, "End Date Code:") %>
-  <%= date_field_tag(:q_event_endDate, :value => Time.now.strftime('%Y-%m-%d')) %>
+  <%= date_field(:q_event_endDate, :value => Time.now.strftime('%Y-%m-%d')) %>
 
   <%= submit_tag("Go!") %>
 <% end %>
