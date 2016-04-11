@@ -1,11 +1,23 @@
+<!-- Search field for artist name -->
 <%= form_tag("/", method: "get") do %>
   <%= label_tag(:q_artist_name, "Search Artist by Name:") %>
   <%= text_field_tag(:q_artist_name) %>
   <%= submit_tag("Go!") %>
 <% end %>
+<!-- Display Artist Results -->
+<% if @artist_results.present? %>
+
+<h3>Artists:</h3>
+  <ol>  
+    <% @artist_results.each do |a| %>
+      <li><%= a[:artist_name] %> <%= link_to("Find Events", artist_event_path(a[:artist_id]), method: :get) %></li>
+    <% end %>
+  </ol>
+
+<% end %>
 
 <br>
-
+<!-- Search field for venue name -->
 <%= form_tag("/", method: "get") do %>
   <%= label_tag(:q_venue_name, "Search Venue by Name:") %>
   <%= text_field_tag(:q_venue_name) %>
@@ -20,8 +32,20 @@
   <%= submit_tag("Go!") %>
 <% end %>
 
+<!-- Display Venue Results -->
+<% if @venue_results.present? %>
+
+<h3>Venues:</h3>
+  <ol>  
+    <% @venue_results.each do |v| %>
+      <li><%= v[:venue_name] %> <%= link_to("Find Events", venue_event_path(a[:venue_id]), method: :get) %></li>
+    <% end %>
+  </ol>
+
+<% end %>
 <br>
 
+<!-- Form for searching events by location/date -->
 <%= form_tag("/", method: "get") do %>
   <%= label_tag("Search Event by Zip Code And/Or Date:") %>
 
@@ -42,50 +66,24 @@
 
 <br>
 
-
-
-<!-- Display Artist Results -->
-<% if @artist_results.present? %>
-
-ARTIST: <%= @artist_name %>
-<br>
-NAMES: 
-  <ol>  
-    <% @artist_results.each do |a| %>
-      <li><%= a[:artist_name] %></li>
-    <% end %>
-  </ol>
-
-<% end %>
-
-<!-- Display Venue Results -->
-<% if @venue_results.present? %>
-
-Venue: <%= @venue_name %>
-<br>
-NAMES: 
-  <ol>  
-    <% @venue_results.each do |v| %>
-      <li><%= v[:venue_name] %></li>
-    <% end %>
-  </ol>
-
-<% end %>
-
 <!-- Display Event Information -->
 <% if @event_results.present? %>
 
-Events:
+<h3>Events:</h3>
   <ol>
     <%= @event_results.each do |e| %>
       <li>
         <ul>
           <li>Event Date: <%= e[:event_date] %></li>
+          <!-- Possible to put in link to venue events?  Does search give me ID? -->
+          <!-- Don't think so but we'll see. -->
           <li>Event Venue: <%= e[:event_venue] %></li>
           <li>Event Artists:
             <ol>
               <% e[:event_artists].each do |a| %>
-                <li><% a['Name'] %></li>
+              <!-- I hope this link works. -->
+              <!-- It should because artists is an array -->
+                <li><% a['Name'] %> <%= link_to("Find Events", artist_event_path(a['Id']), method: :get) %></li>
               <% end %>
             </ol>
           </li>
@@ -99,14 +97,13 @@ Events:
 
 <!-- User Information from Facebook -->
 <% if user_signed_in? %>
+  <h3>Facebook Info:</h3>
 
-<ul>
-
-<li>Email: <%= @user.email %></li>
-<li>Name: <%= @user.name %></li>
-<li>Image: <%= image_tag @user.image %></li>
-
-</ul>
+  <ul>
+    <li>Email: <%= @user.email %></li>
+    <li>Name: <%= @user.name %></li>
+    <li>Image: <%= image_tag @user.image %></li>
+  </ul>
 
 <% end %>
 
