@@ -70,6 +70,12 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
       sprockets-es6 (>= 0.9.0)
+    foundation_rails_helper (1.1.0)
+      actionpack (~> 4.1)
+      activemodel (~> 4.1)
+      activesupport (~> 4.1)
+      railties (~> 4.1)
+      tzinfo (~> 1.2, >= 1.2.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.3)
@@ -196,6 +202,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   foundation-rails
+  foundation_rails_helper
   httparty
   jbuilder (~> 2.0)
   jquery-rails
