@@ -83,7 +83,7 @@ class Search
 
   def get_event_by_id(event_id)
     HTTParty.get("http://api.jambase.com/events?id=#{event_id}&api_key=#{ENV['JAMBASE_API_KEY']}", verify: false).parsed_response
-    # Mayve create my own has to return?
+    # Maybe create my own has to return?
   end
 
   def get_artist_events(artist_name, zipCode, radius, startDate, endDate)

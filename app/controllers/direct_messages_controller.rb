@@ -1,0 +1,2 @@
+class DirectMessagesController < ApplicationController
+end

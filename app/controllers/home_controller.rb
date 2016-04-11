@@ -29,12 +29,16 @@ class HomeController < ApplicationController
   def artist_events
     @artist_id = params[:id]
     @event_results = ::Search.new.get_artist_events(@artist_id)
+    # This may need modification
+    @artist_name = @event_results['Events'][0]['Artists'][0]['Name']
 
   end
 
   def venue_events
     @venue_id = params[:id]
     @venue_events = ::Search.new.get_venue_events(@venue_id)
+    # This may need modification
+    @venue_name = @venue_events['Events'][0]['Venue']['Name']
   end
 
   def single_event

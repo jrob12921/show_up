@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  jb_event_id: 1
+
+two:
+  user_id: 
+  jb_event_id: 1
