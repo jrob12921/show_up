@@ -1,60 +1,14 @@
 class Search
 
-    if artist_name.present?
-      for i in 0...artist_search['Artists'].length
-        artist = artist_search['Artists'][i]
-        artist_names << {artist_id: artist['Id'], artist_name: artist['Name']}
-      end
-    end
-
-    if venue_name.present?
-      for i in 0...venue_search['Venues'].length
-        venue = venue_search['Venues'][i]
-        venue_names << {venue_id: venue['Id'], venue_name: venue['Name']}
-      end
-    end
-
-
-    if venue_zipCode.present?
-      for i in 0...venue_search['Venues'].length
-        venue = venue_search['Venues'][i]
-        venue_names << {venue_id: venue['Id'], venue_name: venue['Name']}
-      end
-    end
-
-    events = []
-
-    if zipCode.present? || startDate.present?
-      for i in 0...event_search['Events'].length
-        event = event_search['Events'][i]
-        # See if I can get venue_ID
-        events << {event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
-      end
-    end
-
-
-  def get_event_by_id(event_id)
-    HTTParty.get("http://api.jambase.com/events?id=#{event_id}&api_key=#{ENV['JAMBASE_API_KEY']}", verify: false).parsed_response
-    # Maybe create my own hash to return?
-  end
-
-    events = []
-
-    for i in 0...artist_events['Events'].length
-      event = artist_events['Events'][i]
-      # See if I can get venue ID...
-      events << {event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
-    end
-
-    events = []
-
-    for i in 0...venue_events['Events'].length
-      event = venue_events['Events'][i]
-      events << {event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
-    end
+   def get_artist_id(artist_name)
+    artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{artist_name.gsub!(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
     artist_search['Artists'][0]['Id']
-    
+  end
+
+  def get_venue_id(venue_name)
+    venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{venue_name.gsub!(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+
     venue_search['Venues'][0]['Id']
   end
 
@@ -125,13 +79,19 @@ class Search
 
     response = HTTParty.get(@url, verify: false).parsed_response
 
-    # response.make_response_pretty(type)!
+    # response.make_api_call_pretty(type)!
   end
 
 
-  def make_response_pretty!(response, type)
+  def make_api_call_pretty!(api_call, type)
+    pretty = []
+    
     if type == "event"
-        
+      for i in 0...api_call['Events'].length
+        event = event_search['Events'][i]
+        # See if I can get venue_ID
+        pretty << {event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
+      end
 
     elsif type == "artist"
 
@@ -139,7 +99,7 @@ class Search
 
     end
         
-    response
+    pretty
   end
 
   def change_page(url) 
