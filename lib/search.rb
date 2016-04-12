@@ -2,7 +2,7 @@ class Search
 
   def search_artist_by_name(artist_name)
 
-    artist_name.gsub!(' ', '+')
+    artist_name.take_out_spaces!
 
     artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{artist_name}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
@@ -20,7 +20,7 @@ class Search
 
   def search_venue_by_name(venue_name)
 
-    venue_name.gsub!(' ', '+')
+    venue_name.take_out_spaces!
 
     venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{venue_name}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
@@ -121,7 +121,7 @@ class Search
     
     url = "http://api.jambase.com/events?"
 
-    url += "artistId=#{venue_id}&"
+    url += "venueId=#{venue_id}&"
     # yyyy-mm-dd
     url += "startDate=#{startDate}&" if startDate.present?
 
@@ -142,7 +142,7 @@ class Search
   end
 
   def get_artist_id(artist_name)
-    artist_name.gsub!(' ', '+')
+    artist_name.take_out_spaces!
 
     artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{artist_name}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
@@ -151,7 +151,7 @@ class Search
   end
 
   def get_venue_id(venue_name)
-    venue_name.gsub!(' ', '+')
+    venue_name.take_out_spaces!
 
     venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{venue_name}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
@@ -160,17 +160,88 @@ class Search
 
   private
 
-  def self.api_randomizer
+  def take_out_spaces!(input)
+    input.gsub!(' ', '+')
+  end
+
+# inputs = {jb_artist_id: a, jb_venue_id: b, jb_event_id: c, zip_code: d, radius: e, start_date: f, end_date: g, artist_name: h, venue_name: i}
+  def insert_into_url!(type, inputs={})  
+    if type == "event"
+      @url = "http://api.jambase.com/events?"
+
+      if inputs['jb_event_id'].present? || inputs['jb_artist_id'].present?
+        # In an event search, only event_id and artist_id can use zip_code and radius, not venue_id
+        @url += "id=#{inputs['jb_event_id']}&" if inputs['jb_event_id'].present?
+        @url += "artistId=#{inputs['jb_artist_id']}&" if inputs['jb_artist_id'].present?  
+        @url += "zipCode=#{zip_code}&" if inputs['zip_code'].present?
+        @url += "radius=#{radius}&" if inputs['radius'].present?
+      
+      elsif inputs['jb_venue_id'].present?
+        @url += "venueId=#{inputs['jb_venue_id']}&"
+      end
+
+      # start_date and end_date can be used in all scenarios 
+      # format is yyyy-mm-dd
+      if inputs['start_date'].present?
+        @url += "startDate=#{start_date}&" 
+      # use end_date as the startDate if a user inputs end date instead of start date
+      elsif !inputs['start_date'].present? && inputs['end_date'].present?
+        @url += "startDate=#{end_date}"
+      # end_date can only be used if start date is also used
+      elsif inputs['end_date'].present? && inputs['start_date'].present?
+        @url += "endDate=#{end_date}&"
+      end
+
+    elsif type == "artist"
+      @url = "http://api.jambase.com/artist?"
+
+      if inputs['jb_artist_id'].present?
+        @url += "id=#{inputs['jb_artist_id']}&"
+
+      elsif inputs['artist_name'].present?
+        @url += "name=#{inputs['artist_name'].gsub!(' ', '+')}&"
+
+      end
+
+    elsif type == "venue"
+      @url = "http://api.jambase.com/venues?"
+
+      if inputs['jb_venue_id'].present?
+        @url += "id=#{inputs['jb_venue_id']}&"  
+      elsif inputs['venue_name'].present?
+        @url += "name=#{inputs['venue_name'].gsub!(' ', '+')}&"
+      elsif inputs['zip_code'].present?
+        @url += "zipCode=#{zip_code}&"
+      end
+    end
+
+    # Randomly Generate API KEY from list of active keys
+    # This should be removed once API Key has more calls and 
     api_keys = [
-        ENV['JAMBASE_API_KEY'],
-        ENV['JAMBASE_2'],
-        ENV['JAMBASE_3'],
-        ENV['JAMBASE_4'],
-        ENV['JAMBASE_5']
+        ENV['JAMBASE_API_KEY']
+        # ,ENV['JAMBASE_2'],
+        # ,ENV['JAMBASE_3'],
+        # ,ENV['JAMBASE_4'],
+        # ,ENV['JAMBASE_5']
       ]
-    api_keys.sample
+
+    @url += "page=0&api_key=#{api_keys.sample}&o=json" # "page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json"
+
+    response = HTTParty.get(@url, verify: false).parsed_response
+
+    # response.make_response_pretty(type)!
+    response
   end
 
 
+  def make_response_pretty!(response, type)
+    # how does this work according to "response.make_response_pretty(type)!" 
+    
+  end
+
+  def change_page(url) 
+  end
+
 end
+
 
