@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+  # before_action :set_event, only: [:show, :edit, :update, :destroy]
+
   def index
   end
 
@@ -26,5 +28,9 @@ class EventsController < ApplicationController
   def event_params
     parms.require(:event).permit(:user_id, :jb_event_id)
   end
+
+  # def set_event
+  #   @event_id = params[:id]
+  # end
 
 end

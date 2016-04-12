@@ -11,7 +11,7 @@ class SearchController < ApplicationController
     if params[:q_name].present?
       @name = params[:q_name]
       @name_results = ::Search.new.search_by_name(@name)
-      @artist_results = @name_results[0]
+      # @artist_results = @name_results[0]
       @venue_results = @name_results[1]
 
     elsif params[:q_zip_code].present?
@@ -26,16 +26,15 @@ class SearchController < ApplicationController
 
   def artist_events
     @artist_id = params[:id]
-    @event_results = ::Search.new.get_artist_events(@artist_id)
-    # This may need modification
-    @artist_name = @event_results['Events'][0]['Artists'][0]['Name']
+    @artist_events = ::Search.new.get_artist_events_by_id(@artist_id)
+    # @artist_name = @artist_events['Events']['Artists'][0]['Name']
   end
 
   def venue_events
     @venue_id = params[:id]
-    @venue_events = ::Search.new.get_venue_events(@venue_id)
+    @venue_events = ::Search.new.get_venue_events_by_id(@venue_id)
     # This may need modification
-    @venue_name = @venue_events['Events'][0]['Venue']['Name']
+    # @venue_name = @venue_events['Events'][0]['Venue']['Name']
   end
 
   def single_event
