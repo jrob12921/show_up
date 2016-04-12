@@ -7,12 +7,14 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  get 'artist_events/:id' => "home#artist_events", as: "artist_events"
-  get 'venue_events/:id' => "home#venue_events", as: "venue_events"
-  get 'event/:id' => "home#single_event", as: "event"
+  get 'artist_events/:id' => "search#artist_events", as: "artist_events"
+  get 'venue_events/:id' => "search#venue_events", as: "venue_events"
+  get 'event/:id' => "search#single_event", as: "event"
+  get 'local_events' => "search#local_events", as: "local_events"
+  get 'results' => "search#results", as: 'results'
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root 'search#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

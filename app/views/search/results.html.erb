@@ -1,0 +1,54 @@
+<h1>SEARCH RESULTS</h1>
+<!-- Display Artist Results -->
+<% if @artist_results.present? %>
+
+  <h3>Artists:</h3>
+  <ol>  
+    <% @artist_results.each do |a| %>
+      <li><%= a[:artist_name] %> <%= link_to("Find Events", artist_event_path(a[:artist_id]), method: :get) %></li>
+    <% end %>
+  </ol>
+
+<% end %>
+
+<br>
+<!-- Display Venue Results -->
+<% if @venue_results.present? %>
+
+  <h3>Venues:</h3>
+  <ol>  
+    <% @venue_results.each do |v| %>
+      <li><%= v[:venue_name] %> <%= link_to("Find Events", venue_event_path(a[:venue_id]), method: :get) %></li>
+    <% end %>
+  </ol>
+
+<% end %>
+
+<!-- Display Events Results -->
+<% if @event_results.present? %>
+
+  <h3>Events:</h3>
+  <ol>
+    <%= @event_results.each do |e| %>
+      <li>
+        <ul>
+          <li>Event Date: <%= e[:event_date] %></li>
+          <!-- Possible to put in link to venue events?  Does search give me ID? -->
+          <!-- Don't think so but we'll see. -->
+          <li>Event Venue: <%= e[:event_venue] %></li>
+          <li>Event Artists:
+            <ol>
+              <% e[:event_artists].each do |a| %>
+              <!-- I hope this link works. -->
+              <!-- It should because artists is an array -->
+                <li><% a['Name'] %> <%= link_to("Find Events", artist_event_path(a['Id']), method: :get) %></li>
+              <% end %>
+            </ol>
+          </li>
+          <li><%= link_to("Buy Tickets", "#{e[:event_url]}") %></li>
+        </ul>
+      </li>
+    <% end %>
+  </ol>
+
+<% end %>

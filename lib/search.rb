@@ -11,8 +11,54 @@ class Search
 
     venue_search['Venues'][0]['Id']
   end
+  # below used for artists/venues
+  def search_by_name(name)
+    # put name into artist search
+    artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{name.gsub!(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
-  private
+    artist_names = []
+    for i in 0...artist_search['Artists'].length
+      artist = artist_search['Artists'][i]
+      artist_names << {jb_artist_id: artist['Id'], artist_name: artist['Name']}
+    end
+
+    # Put name into venue search
+    venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{name.gsub!(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+
+    venue_names = []
+    for i in 0...venue_search['Venues'].length
+      venue = venue_search['Venues'][i]
+      venue_names << {jb_venue_id: venue['Id'], venue_name: venue['Name']}
+    end
+
+    [artist_names, venue_names]
+  end
+  # below used for venues/events
+  def search_by_zip(zip_code)
+    #put zip into venue search
+    venue_search = HTTParty.get("http://api.jambase.com/venues?zipCode=#{zip_code}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+
+    venue_names = []
+
+    for i in 0...venue_search['Venues'].length
+      venue = venue_search['Venues'][i]
+      venue_names << {jb_venue_id: venue['Id'], venue_name: venue['Name']}
+    end
+
+    #put zip into event search
+    event_search = HTTParty.get("http://api.jambase.com/events?zipCode=#{zip_code}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+
+    events = []
+    # Below, venue is a hash, artists is an array of hashes
+    for i in 0...event_search['Events'].length
+      event = event_search['Events'][i]
+      events << {jb_event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
+    end
+
+    [venue_names, events]
+  end
+
+  # private
 
   # inputs = {jb_artist_id: a, jb_venue_id: b, jb_event_id: c, zip_code: d, radius: e, start_date: f, end_date: g, artist_name: h, venue_name: i}
   def insert_into_url!(type, inputs={})  
@@ -79,27 +125,38 @@ class Search
 
     response = HTTParty.get(@url, verify: false).parsed_response
 
-    # response.make_api_call_pretty(type)!
+    # Is this notation valid
+    # response.make_api_call_pretty!(type)
+    # what about this
+    make_api_call_pretty!(response,type)
   end
 
+  private
 
   def make_api_call_pretty!(api_call, type)
-    pretty = []
+    response = []
     
     if type == "event"
       for i in 0...api_call['Events'].length
-        event = event_search['Events'][i]
-        # See if I can get venue_ID
-        pretty << {event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
+        event = api_call['Events'][i]
+        # See if I can get venue_ID??
+        response << {jb_event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
       end
 
     elsif type == "artist"
+      for i in 0...api_call['Artists'].length
+        artist = api_call['Artists'][i]
+        response << << {artist_id: artist['Id'], artist_name: artist['Name']}
+      end
 
     elsif type =="venue"
-
+      for i in 0...api_call['Venues'].length
+        venue = api_call['Venues'][i]
+        response << {venue_id: venue['Id'], venue_name: venue['Name']}
+      end
     end
         
-    pretty
+    response
   end
 
   def change_page(url) 

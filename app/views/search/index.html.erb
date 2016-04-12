@@ -1,0 +1,38 @@
+<h1>MAIN PAGE FOR SEARCHING</h1>
+
+<h2>SEARCH ARTISTS/VENUES BY NAME:</h2>
+<%= form_tag("/results", method: "get") do %>
+
+  <%= label_tag(:q_name, "Search by Name (Artists/Venues):") %>
+  <%= text_field_tag(:q_name) %>
+
+  <%= submit_tag("Search!") %>
+<% end %>
+
+<h2>SEARCH VENUES AND EVENTS BY ZIP CODE</h2>
+<%= form_tag("/results", method: "get") do %>
+  
+  <%= label_tag(:q_zip_code, "Zip Code (Events/Artists):") %>
+  <%= text_field_tag(:q_zip_code) %>
+
+  <%= submit_tag("Search!") %>
+<% end %>
+
+<br>
+
+
+<br>
+<!-- User Information from Facebook -->
+<% if user_signed_in? %>
+  <h3>Facebook Info:</h3>
+
+  <ul>
+    <li>Email: <%= @user.email %></li>
+    <li>Name: <%= @user.name %></li>
+    <li>Image: <%= image_tag @user.image %></li>
+  </ul>
+<% end %>
+
+<!-- JamBase Attribution -->
+<a href="http://www.JamBase.com" target="_top" title="JamBase Concert Search">
+<img src= "http://images.jambase.com/logos/jambase140x70.gif" alt="Search JamBase Concerts" border="0" /></a>
