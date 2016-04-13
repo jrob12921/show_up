@@ -6,7 +6,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event_info = ::Search.new.get_event_by_id(params[:id])
+    @event_info = Rails.cache.fetch(:event_info, expires_in: 24.hours) do
+      ::Search.new.get_event_by_id(params[:id])
+    end
     @event_id = @event_info[:jb_event_id]
     @event = Event.find_or_create_by(jb_event_id: @event_id)
 
