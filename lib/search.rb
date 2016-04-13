@@ -1,13 +1,13 @@
 class Search
 
   #  def get_artist_id(artist_name)
-  #   artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{artist_name.gsub!(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+  #   artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{artist_name.gsub(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
   #   artist_search['Artists'][0]['Id']
   # end
 
   # def get_venue_id(venue_name)
-  #   venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{venue_name.gsub!(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+  #   venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{venue_name.gsub(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
   #   venue_search['Venues'][0]['Id']
   # end
@@ -15,7 +15,7 @@ class Search
   # below used for artists/venues
   def search_by_name(name)
     # put name into artist search
-    artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{name.gsub!(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{name.gsub(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
     artist_names = []
     if artist_search.present?
@@ -27,7 +27,7 @@ class Search
     end
 
     # Put name into venue search
-    venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{name.gsub!(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{name.gsub(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
     venue_names = []
     if venue_search.present?

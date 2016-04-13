@@ -1,18 +1,26 @@
-<h1>MAIN PAGE FOR SEARCHING</h1>
+<h2>
+  <% if user_signed_in? %>
+    Welcome back, <%= current_user.name.split(" ").first %>!
+  <% else %>
+    Please sign in or sign up!
+  <% end %>
+</h2>
 
-<h2>SEARCH ARTISTS/VENUES BY NAME:</h2>
+<h3>Try searching some stuff...</h3>
+
 <%= form_tag("/results", method: "get") do %>
 
-  <%= label_tag(:q_name, "Search by Name (Artists/Venues):") %>
+  <%= label_tag(:q_name, "Search Artists and Venues by Name:") %>
   <%= text_field_tag(:q_name) %>
 
   <%= submit_tag("Search!") %>
 <% end %>
+<br>
+<div>OR</div>
 
-<h2>SEARCH VENUES AND EVENTS BY ZIP CODE</h2>
 <%= form_tag("/results", method: "get") do %>
   
-  <%= label_tag(:q_zip_code, "Zip Code (Events/Artists):") %>
+  <%= label_tag(:q_zip_code, "Search Events and Venues by Zip Code:") %>
   <%= text_field_tag(:q_zip_code) %>
 
   <%= submit_tag("Search!") %>
@@ -22,17 +30,9 @@
 
 
 <br>
-<!-- User Information from Facebook -->
-<% if user_signed_in? %>
-  <h3>Facebook Info:</h3>
 
-  <ul>
-    <li>Email: <%= @user.email %></li>
-    <li>Name: <%= @user.name %></li>
-    <li>Image: <%= image_tag @user.image %></li>
-  </ul>
-<% end %>
 
 <!-- JamBase Attribution -->
+<div>Powered By:</div>
 <a href="http://www.JamBase.com" target="_top" title="JamBase Concert Search">
 <img src= "http://images.jambase.com/logos/jambase140x70.gif" alt="Search JamBase Concerts" border="0" /></a>

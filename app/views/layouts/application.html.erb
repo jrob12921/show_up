@@ -4,24 +4,41 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "MeetB4TheShow" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "MeetB4theShow" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
 
-    <%= display_flash_messages %>
+  <%= display_flash_messages %>
 
-      <% if user_signed_in? %>
+  <nav class="top-bar" id="main_nav">
+    <span class="app_title">MeetB4theShow</span>
+    <div class="top-bar-right">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li>
+          <% if user_signed_in? %>
+            <%= image_tag current_user.image %>
+          <% else %>
+            <li><%= link_to('Login/Sign Up', new_user_session_path, method: :get) %></li>
+          <% end %>
+            <ul class="dropdown menu" data-dropdown-menu>
+              <% if user_signed_in? %>
+                <li><%= link_to('My Events', event_path(current_user.id), method: :get) %></li>
+                <li><%= link_to('Search', root_path, method: :get) %></li>
+                <li><%= link_to('My Chats', direct_message_path(current_user.id), method: :get) %></li>
+                <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+              <% end %>
+            </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-    <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-
-    <% end %>
-
-    <%= yield %>
+  <%= yield %>
 
   </body>
 </html>

@@ -6,6 +6,11 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find_or_create_by(jb_event_id: params[:id])
+
+    
+    
+    @user = User.find(current_user.id)
   end
 
   def new
