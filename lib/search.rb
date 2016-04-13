@@ -85,7 +85,7 @@ class Search
 
 
   def get_venue_events_by_id(venue_id)
-    venue_events = HTTParty.get("http://api.jambase.com/events?artistId=#{venue_id}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    venue_events = HTTParty.get("http://api.jambase.com/events?venueId=#{venue_id}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
 
     events = []
 
@@ -95,6 +95,24 @@ class Search
     end
 
     events
+  end
+
+  def get_event_by_id(event_id)
+    event = HTTParty.get("http://api.jambase.com/events?id=#{event_id}&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    # not working
+    # event_info = event_json['Events'][0]
+    
+    results = {jb_event_id: event['Id'], event_date: event['Date'], event_venue: event['Venue'], event_artists: event['Artists'], event_url: event['TicketUrl']}
+  end
+
+  def get_venue_name_by_id(venue_id)
+    search = HTTParty.get("http://api.jambase.com/venues?id=#{venue_id}&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    venue = search['Name']
+  end
+
+  def get_artist_name_by_id(artist_id)
+    search = HTTParty.get("http://api.jambase.com/artists?id=#{artist_id}&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    artist = search['Name']
   end
 
 end

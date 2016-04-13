@@ -28,13 +28,24 @@ class SearchController < ApplicationController
     @artist_id = params[:id]
     @artist_events = ::Search.new.get_artist_events_by_id(@artist_id)
     # @artist_name = @artist_events['Events']['Artists'][0]['Name']
+    @artist_name = ::Search.new.get_artist_name_by_id(@artist_id)
+    if !@artist_events.present?
+      @message = "No Upcoming Events for this Artist"
+    end
+
   end
 
   def venue_events
     @venue_id = params[:id]
     @venue_events = ::Search.new.get_venue_events_by_id(@venue_id)
-    # This may need modification
-    # @venue_name = @venue_events['Events'][0]['Venue']['Name']
+    if @venue_events.present?
+      # To avoid another API call
+      @venue_name = @venue_events.first[:event_venue]['Name']
+      @page_header = @venue_name
+    else
+      @message = "No Upcoming Events at this Venue!"
+      @page_header = ::Search.new.get_venue_name_by_id(@venue_id)
+    end
   end
 
   def single_event

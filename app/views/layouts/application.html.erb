@@ -16,8 +16,8 @@
   <%= display_flash_messages %>
 
   <nav class="top-bar" id="main_nav">
-    <span class="app_title">MeetB4theShow</span>
-    <div class="top-bar-right">
+    <span class="page_header"><%= @page_header ||= "MeetB4theShow" %></span>
+    <div class="top-bar-right" id="prof_pic">
       <ul class="dropdown menu" data-dropdown-menu>
         <li>
           <% if user_signed_in? %>

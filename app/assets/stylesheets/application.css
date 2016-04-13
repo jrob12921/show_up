@@ -17,10 +17,17 @@
  */
 
 
-  .top-bar-right {
+  // .top-bar-right {
+  //   width: inherit;
+  // }
+
+  #prof_pic {
     width: inherit;
   }
 
+  ul li {
+    list-style-type: square;
+  }
 
 
 
@@ -30,7 +37,7 @@
   } /* Define mobile styles */
 
 @media only screen and (max-width: 40em) { 
- .app_title {
+ .page_header {
     font-size: 30px;
   }
    } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
