@@ -1,1 +1,29 @@
-<%= @event %>
+<h2><%= @marquee %></h2>
+
+<h3>Artists:</h3>
+  <ol>
+    <% @event_artists.each do |a| %>
+
+      <li><%= a['Name'] %></li>
+    <% end %>
+  </ol>
+
+<h3>Venue:</h3> 
+
+<ul>
+  <li><%= @event_venue['Name'] %></li>
+  <li><%= @event_venue['Address'] %></li>
+  <li><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></li>
+  <li><%= link_to("Website", @event_venue['Url'], method: :get) %></li>
+</ul>
+
+
+<h3>Date: <%= DateTime.parse(@event_date).strftime("%-m/%-d/%y") %></h3>
+
+
+<div><%= link_to("Buy Tickets!", @event_url, method: :get) %></div>
+
+
+
+<h3>GROUP POSTS</h3>
+
