@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411212106) do
+ActiveRecord::Schema.define(version: 20160414190333) do
 
   create_table "direct_messages", force: :cascade do |t|
     t.integer  "sender_id"
@@ -22,13 +22,10 @@ ActiveRecord::Schema.define(version: 20160411212106) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "jb_event_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
-
-  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "group_messages", force: :cascade do |t|
     t.integer  "event_id"
@@ -40,6 +37,16 @@ ActiveRecord::Schema.define(version: 20160411212106) do
 
   add_index "group_messages", ["event_id"], name: "index_group_messages_on_event_id"
   add_index "group_messages", ["user_id"], name: "index_group_messages_on_user_id"
+
+  create_table "user_events", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_events", ["event_id"], name: "index_user_events_on_event_id"
+  add_index "user_events", ["user_id"], name: "index_user_events_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :events
   resources :direct_messages
   resources :group_messages
+  resources :user_events
 
   get 'single_dm/:sender_id/:recipient_id' => "direct_messages#single_dm", as: 'single_dm'
 

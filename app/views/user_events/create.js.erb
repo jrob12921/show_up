@@ -1,0 +1,7 @@
+$(".attend_button_container").append('<%= link_to("Unattend", user_event_path(@event.id), method: :delete, class: "large button unattend", remote: true) %>')
+
+
+$(".attend").on("ajax:complete", function(e){
+  $(".attend").hide()
+})
+
