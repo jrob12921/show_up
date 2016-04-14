@@ -17,9 +17,9 @@
  */
 
 
-  // .top-bar-right {
-  //   width: inherit;
-  // }
+   .top-bar-right {
+     width: inherit;
+   }
 
   #prof_pic {
     width: inherit;
@@ -41,8 +41,19 @@
     text-align: right;
   }  
 
-  .single_group_message {
+  .marquee_title {
+    text-align: right;
+  }
 
+  .marquee_content {
+
+    li {
+      list-style-type: none;
+    }
+  }
+
+  .attend_button_container {
+    /*width: 100%;*/
   }
 
 

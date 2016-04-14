@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   get 'artist_events/:id' => "search#artist_events", as: "artist_events"
   get 'venue_events/:id' => "search#venue_events", as: "venue_events"
-  get 'event/:id' => "search#single_event", as: "single_event"
   get 'local_events' => "search#local_events", as: "local_events"
   get 'results' => "search#results", as: 'results'
 
@@ -18,6 +17,9 @@ Rails.application.routes.draw do
   resources :group_messages
 
   get 'single_dm/:sender_id/:recipient_id' => "direct_messages#single_dm", as: 'single_dm'
+
+  post 'attend/:id' => "events#attend", as: 'attend'
+  delete 'unattend/:id' => "events#unattend", as: 'unattend'
   
   # You can have the root of your site routed with "root"
   root 'search#index'

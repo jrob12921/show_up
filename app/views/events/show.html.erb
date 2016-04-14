@@ -1,12 +1,35 @@
-<h2><%= @marquee.html_safe %></h2>
-
-<h3>Artists:</h3>
-  <ol>
-    <% @event_artists.each do |a| %>
-
-      <li><%= a['Name'] %></li>
+<div class="row">
+  <div class="marquee_title small-1 column">See:<br>At:<br>On:</div>
+  <div class="marquee_content small-7 column">
+    <%= @marquee.html_safe %>
+  </div>
+  <div class="small-3 column attend_button_container">
+    <% if @event.user_attending?(current_user) %>
+      <%= link_to("Unattend", unattend_path(@event.id), method: :delete, class: "large button unattend", remote: true) %>
+    <% else %>
+      <%= link_to("Attend", attend_path(@event.id), method: :post, class: "large button attend", remote: true) %>
     <% end %>
-  </ol>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <%= link_to("See More Events from Artist", artist_event_path()) %>
+</div>
+
+<% if @event_artists.length > 1 %>
+  <div class="row">
+    <h3>Artists:</h3>
+      <ul>
+        <% @event_artists.each do |a| %>
+          <li><%= a['Name'] %></li>
+        <% end %>
+      </ul>
+  </div>
+<br>
+<% end %>
+
 
 <h3>Venue:</h3> 
 
@@ -19,7 +42,9 @@
 
 <hr>
 
-<h3>Group Message:</h3>
+<% if user_signed_in? && %>
+
+  <h3>Group Message:</h3>
   
   <%= form_for @new_group_message, remote: true do |ngm| %>
     <%= ngm.hidden_field :event_id, value: @event.id %>
@@ -45,4 +70,7 @@
     <% end %>
   </div>
 
+<% else %>
+
+<% end %>
 

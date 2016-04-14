@@ -119,8 +119,7 @@ class Search
 
   def self.get_api_key
     api_keys = [
-      # ENV['JAMBASE_API_KEY']
-      # ,
+      ENV['JAMBASE_API_KEY'],
       ENV['JAMBASE_API_KEY2']
     ]
 

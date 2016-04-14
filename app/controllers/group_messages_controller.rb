@@ -18,7 +18,7 @@ class GroupMessagesController < ApplicationController
     @group_message.save
 
     if @group_message.save
-      flash[:message] = "Message Posted Successfully"
+      # flash[:message] = "Message Posted Successfully"
       
       respond_to do |format|
         format.js
