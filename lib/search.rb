@@ -1,13 +1,13 @@
 class Search
 
   #  def get_artist_id(artist_name)
-  #   artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{artist_name.gsub(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+  #   artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{artist_name.gsub(' ', '+')}&page=0&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
 
   #   artist_search['Artists'][0]['Id']
   # end
 
   # def get_venue_id(venue_name)
-  #   venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{venue_name.gsub(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+  #   venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{venue_name.gsub(' ', '+')}&page=0&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
 
   #   venue_search['Venues'][0]['Id']
   # end
@@ -15,7 +15,7 @@ class Search
   # below used for artists/venues
   def search_by_name(name)
     # put name into artist search
-    artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{name.gsub(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    artist_search = HTTParty.get("http://api.jambase.com/artists?name=#{name.gsub(' ','+')}&page=0&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
 
     artist_names = []
     if artist_search.present?
@@ -27,7 +27,7 @@ class Search
     end
 
     # Put name into venue search
-    venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{name.gsub(' ', '+')}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    venue_search = HTTParty.get("http://api.jambase.com/venues?name=#{name.gsub(' ','+')}&page=0&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
 
     venue_names = []
     if venue_search.present?
@@ -43,7 +43,7 @@ class Search
   # below used for venues/events
   def search_by_zip(zip_code)
     #put zip into venue search
-    venue_search = HTTParty.get("http://api.jambase.com/venues?zipCode=#{zip_code}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    venue_search = HTTParty.get("http://api.jambase.com/venues?zipCode=#{zip_code}&page=0&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
 
     venue_names = []
 
@@ -55,7 +55,7 @@ class Search
     end
 
     #put zip into event search
-    event_search = HTTParty.get("http://api.jambase.com/events?zipCode=#{zip_code}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    event_search = HTTParty.get("http://api.jambase.com/events?zipCode=#{zip_code}&page=0&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
 
     events = []
     # Below, venue is a hash, artists is an array of hashes
@@ -71,7 +71,7 @@ class Search
 
   
   def get_artist_events_by_id(artist_id)
-    artist_events = HTTParty.get("http://api.jambase.com/events?artistId=#{artist_id}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    artist_events = HTTParty.get("http://api.jambase.com/events?artistId=#{artist_id}&page=0&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
 
     events = []
 
@@ -85,7 +85,7 @@ class Search
 
 
   def get_venue_events_by_id(venue_id)
-    venue_events = HTTParty.get("http://api.jambase.com/events?venueId=#{venue_id}&page=0&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    venue_events = HTTParty.get("http://api.jambase.com/events?venueId=#{venue_id}&page=0&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
 
     events = []
 
@@ -98,7 +98,7 @@ class Search
   end
 
   def get_event_by_id(event_id)
-    event = HTTParty.get("http://api.jambase.com/events?id=#{event_id}&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    event = HTTParty.get("http://api.jambase.com/events?id=#{event_id}&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
     # not working
     # event_info = event_json['Events'][0]
     
@@ -106,14 +106,27 @@ class Search
   end
 
   def get_venue_name_by_id(venue_id)
-    search = HTTParty.get("http://api.jambase.com/venues?id=#{venue_id}&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    search = HTTParty.get("http://api.jambase.com/venues?id=#{venue_id}&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
     venue = search['Name']
   end
 
   def get_artist_name_by_id(artist_id)
-    search = HTTParty.get("http://api.jambase.com/artists?id=#{artist_id}&api_key=#{ENV['JAMBASE_API_KEY']}&o=json", verify: false).parsed_response
+    search = HTTParty.get("http://api.jambase.com/artists?id=#{artist_id}&api_key=#{::Search.get_api_key}&o=json", verify: false).parsed_response
     artist = search['Name']
   end
+
+  private
+
+  def self.get_api_key
+    api_keys = [
+      # ENV['JAMBASE_API_KEY']
+      # ,
+      ENV['JAMBASE_API_KEY2']
+    ]
+
+    api_keys.sample
+  end
+
 
 end
 

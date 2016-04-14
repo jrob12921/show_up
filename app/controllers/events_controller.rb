@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   def index
     # Should be list of all events which at least one person is going too...
-    @events = Event.uniq.pluck(:jb_event_id)
+    @events = Event.pluck(:jb_event_id).uniq
   end
 
   def show
@@ -25,9 +25,12 @@ class EventsController < ApplicationController
     end
 
 
-    @marquee = "See #{@artist_names.join(", ")} @ #{@event_venue['Name']}"
+    @marquee = "See: <strong>#{@artist_names.join(", ")}</strong><br>At: <strong>#{@event_venue['Name']}</strong><br>On: <strong>#{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}</strong>"
 
     @user = User.find(current_user.id)
+
+    @group_messages = GroupMessage.where(event_id: @event.id, user_id: @user.id)
+    @new_group_message = GroupMessage.new
   end
 
   def new

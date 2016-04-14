@@ -1,7 +1,6 @@
-<h1><strong>This</strong> Artist's Events:</h1>
 <h3>Upcoming Events:</h3>
 <ol>
-  <%= @artist_events.each do |e| %>
+  <% @artist_events.each do |e| %>
     <li>
       <ul>
         <li><%= link_to("View This Event", event_path(e[:jb_event_id]), method: :get) %></li>
@@ -10,7 +9,7 @@
         <li>Venue: <%= link_to(e[:event_venue]['Name'], venue_events_path(e[:event_venue]['Id']), method: :get)  %> </li>
         <li>Artists:
           <ol>
-            <%= e[:event_artists].each do |a| %>
+            <% e[:event_artists].each do |a| %>
               <li><%= link_to(a['Name'], artist_events_path(a['Id']), methood: :get) %></li>
             <% end %>
           </ol>

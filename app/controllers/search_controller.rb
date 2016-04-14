@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
 
   require "search"
-  # user 'Rails.cache.clear' to clear cache
+  # use 'Rails.cache.clear' to clear cache
   def index
     @user = User.find(current_user.id) if user_signed_in? 
 
@@ -38,6 +38,7 @@ class SearchController < ApplicationController
     @artist_name = Rails.cache.fetch(:artist_name, expires_in: 24.hours) do
       ::Search.new.get_artist_name_by_id(@artist_id)
     end
+    @page_header = @artist_name
     if !@artist_events.present?
       @message = "No Upcoming Events for this Artist"
     end

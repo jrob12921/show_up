@@ -1,4 +1,4 @@
-<h2><%= @marquee %></h2>
+<h2><%= @marquee.html_safe %></h2>
 
 <h3>Artists:</h3>
   <ol>
@@ -11,19 +11,38 @@
 <h3>Venue:</h3> 
 
 <ul>
-  <li><%= @event_venue['Name'] %></li>
-  <li><%= @event_venue['Address'] %></li>
-  <li><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></li>
-  <li><%= link_to("Website", @event_venue['Url'], method: :get) %></li>
+  <li><%= @event_venue['Name'] %> <%= link_to("(Venue Website)", @event_venue['Url'], method: :get) %></li>
+  <li><%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></li>
 </ul>
-
-
-<h3>Date: <%= DateTime.parse(@event_date).strftime("%-m/%-d/%y") %></h3>
-
 
 <div><%= link_to("Buy Tickets!", @event_url, method: :get) %></div>
 
+<hr>
 
+<h3>Group Message:</h3>
+  
+  <%= form_for @new_group_message, remote: true do |ngm| %>
+    <%= ngm.hidden_field :event_id, value: @event.id %>
+    <%= ngm.hidden_field :user_id, value: @user.id %>
+    <%= ngm.text_area :body, rows: 5, label: false %>
+    <%= ngm.submit "Make Post"  %>
+  <% end %>
+  
+  <div class="all_group_messages">
+    <% if @group_messages.present? %>  
+      <% @group_messages.reverse_each do |gm| %>
+        <hr>
+        <div class="single_group_message">
+          <div class="gm_body"><%= gm.body %></div>
+          <div class="gm_info"><strong><em><%= gm.user.name %></em></strong></div>
+          <div class="gm_info"><strong><em><%= gm.created_at.strftime("%-m/%-d/%y") %></em></strong></div>
+          <div class="gm_info"><strong><em><%= gm.created_at.strftime("%-I:%M:%S %p %Z") %></em></strong></div>
+        </div>
+        <hr>
+      <% end %>
+    <% else %>
+      <div>There are no messages yet. Post something!</div>
+    <% end %>
+  </div>
 
-<h3>GROUP POSTS</h3>
 
