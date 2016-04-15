@@ -5,9 +5,7 @@
   </div>
   <div class="small-3 column attend_button_container">
     <% if @user_going %>
-      <%= link_to("Unattend", user_event_path(@event.id), method: :delete, class: "large button unattend", remote: true) %>
-    <% else %>
-      <%= link_to("Attend", new_user_event_path(@event.id), method: :get, class: "large button attend", remote: true) %>
+      <%= link_to("You're Going to this Event", user_event_path(@event.id), method: :get, class: "large button attend") %>
     <% end %>
   </div>
 </div>
@@ -38,35 +36,4 @@
 
 <hr>
 
-<% if user_signed_in? && %>
-
-  <h3>Group Message:</h3>
-  
-  <%= form_for @new_group_message, remote: true do |ngm| %>
-    <%= ngm.hidden_field :event_id, value: @event.id %>
-    <%= ngm.hidden_field :user_id, value: @user.id %>
-    <%= ngm.text_area :body, rows: 5, label: false %>
-    <%= ngm.submit "Make Post"  %>
-  <% end %>
-  
-  <div class="all_group_messages">
-    <% if @group_messages.present? %>  
-      <% @group_messages.reverse_each do |gm| %>
-        <hr>
-        <div class="single_group_message">
-          <div class="gm_body"><%= gm.body %></div>
-          <div class="gm_info"><strong><em><%= gm.user.name %></em></strong></div>
-          <div class="gm_info"><strong><em><%= gm.created_at.strftime("%-m/%-d/%y") %></em></strong></div>
-          <div class="gm_info"><strong><em><%= gm.created_at.strftime("%-I:%M:%S %p %Z") %></em></strong></div>
-        </div>
-        <hr>
-      <% end %>
-    <% else %>
-      <div>There are no messages yet. Post something!</div>
-    <% end %>
-  </div>
-
-<% else %>
-
-<% end %>
-
+LINK TO GROUP MESSAGE???

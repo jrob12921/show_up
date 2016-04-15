@@ -1,0 +1,16 @@
+<h2>My Events</h2>
+
+<ol>
+  <% @jb_events.each do |j| %>
+    <li>
+        <li><%= j %></li>    
+
+          <% j[:event_artists].each do |a| %>
+              <li><%= a['Name'] %></li>
+          <% end %>
+          
+        <li><%= j[:event_venue] %></li>
+        <li><%= j[:event_date] %></li>
+    </li>
+    <% end %>
+</ol>

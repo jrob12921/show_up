@@ -12,15 +12,14 @@ Rails.application.routes.draw do
   get 'local_events' => "search#local_events", as: "local_events"
   get 'results' => "search#results", as: 'results'
 
-  resources :events
+  resources :events do 
+    resources :group_messages
+  end
   resources :direct_messages
-  resources :group_messages
   resources :user_events
 
   get 'single_dm/:sender_id/:recipient_id' => "direct_messages#single_dm", as: 'single_dm'
 
-  post 'attend/:id' => "events#attend", as: 'attend'
-  delete 'unattend/:id' => "events#unattend", as: 'unattend'
   
   # You can have the root of your site routed with "root"
   root 'search#index'

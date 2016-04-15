@@ -27,7 +27,7 @@
           <% end %>
             <ul class="dropdown menu" data-dropdown-menu>
               <% if user_signed_in? %>
-                <li><%= link_to('My Events', event_path(current_user.id), method: :get) %></li>
+                <li><%= link_to('My Events', user_events_path, method: :get) %></li>
                 <li><%= link_to('Search', root_path, method: :get) %></li>
                 <li><%= link_to('My Chats', direct_message_path(current_user.id), method: :get) %></li>
                 <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>

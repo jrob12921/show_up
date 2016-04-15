@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
   before_action :set_user, only: [:show]
 
+  require "search"
+
   # before_action :set_event, only: [:attend, :unattend]
 
   def index
@@ -15,7 +17,7 @@ class EventsController < ApplicationController
     
     @event = Event.find_or_create_by(jb_event_id: params[:id])
     
-    @event_info = ::Search.new.get_event_by_id(@event.jb_event_id)
+    @event_info = ::Search.new.get_event_by_id(params[:id])
 
     @jb_event_id = @event_info[:jb_event_id]
 
@@ -33,10 +35,10 @@ class EventsController < ApplicationController
 
     @marquee = "<strong>#{@artist_names.join(", ")}</strong><br><strong>#{@event_venue['Name']}</strong><br><strong>#{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}</strong>"
 
-    @group_messages = GroupMessage.where(event_id: @event.id, user_id: @user.id)
-    @new_group_message = GroupMessage.new
+    # @group_messages = GroupMessage.where(event_id: @event.id, user_id: @user.id)
+    # @new_group_message = GroupMessage.new
 
-    @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
+    # @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
 
   end
 

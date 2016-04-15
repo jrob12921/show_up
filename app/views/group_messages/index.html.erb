@@ -1,0 +1,37 @@
+<h3>Group Message:</h3>
+
+<%= form_for :group_message, remote: true do |ngm| %>
+  <%= ngm.hidden_field :event_id, value: @event.id %>
+  <%= ngm.hidden_field :user_id, value: @user.id %>
+  <%= ngm.text_area :body, rows: 5, label: false %>
+  <%= ngm.submit :create, value: "Post", class: "radius secondary button"  %>
+<% end %>
+
+<div class="all_group_messages">
+  <% if @group_messages.present? %>  
+    <% @group_messages.reverse_each do |gm| %>
+      <% if gm.user.id == @user.id %>
+        <div class="single_group_message mine row">
+      <% else %>
+        <div class="single_group_message row">
+      <% end %>
+          <div class="gm_body small-8 column"><%= gm.body %></div>
+          <div class="gm_info small-4 column">
+            <strong><em>
+              <div>
+                <% if gm.user.id == @user.id %>
+                  You
+                <% else %>
+                  <%= gm.user.name %>
+                <% end %>
+              </div>
+              <div><%= gm.created_at.strftime("%-m/%-d/%y") %></div>
+              <div><%= gm.created_at.strftime("%-I:%M:%S %P") %></div>
+            </em></strong>
+          </div>
+        </div>
+    <% end %>
+  <% else %>
+    <div>There are no messages yet. Post something!</div>
+  <% end %>
+</div>

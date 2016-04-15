@@ -1,12 +1,18 @@
 class GroupMessagesController < ApplicationController
   
+  before_action :set_user, only: [:index]
+
   def index
     # Don't know if I will need
+    @event = Event.find(params[:event_id])
+    # @group_messages = GroupMessage.where(user_id: )
+
+    @group_messages = GroupMessage.where(event_id: @event.id, user_id: @user.id)
+
+    @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
   end
 
   def show
-    @event_id = params[:id]
-    # @group_messages = GroupMessage.where(user_id: )
   end
 
   def new
@@ -14,7 +20,7 @@ class GroupMessagesController < ApplicationController
   end
 
   def create
-    @group_message = GroupMessage.new(group_message_params)
+    @group_message = GroupMessage.find_or_create_by(group_message_params)
     @group_message.save
 
     if @group_message.save
@@ -43,6 +49,10 @@ class GroupMessagesController < ApplicationController
 
   def group_message_params
     params.require(:group_message).permit(:event_id, :user_id, :body)
+  end
+
+  def set_user
+    @user = User.find(current_user.id)
   end
 
 end
