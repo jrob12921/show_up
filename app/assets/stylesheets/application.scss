@@ -95,18 +95,32 @@
     background-color: $green;
   }
 
+  a {
+    
+    // font-style: oblique;
+
+    &:link, &:visited {
+      color: black;
+    }
+
+  }
+
 
 
 // Small screens
 @media only screen { 
 
-  } /* Define mobile styles */
+} /* Define mobile styles */
 
 @media only screen and (max-width: 640px) { 
  .page_header {
     font-size: 30px;
   }
-   } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+   a {
+      text-shadow: 2px 2px 3px black;
+    }
+} /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
 // Medium screens
 @media only screen and (min-width: 641px) { 
@@ -115,14 +129,21 @@
     font-size: 54px;
   }
 
-  } /* min-width 641px, medium screens */
+   a:hover {
+      text-shadow: 1px 1px 1px black;
+    }
+
+} /* min-width 641px, medium screens */
 
 @media only screen and (min-width: 641px) and (max-width: 1024px) {  
-  } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+  
+} /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 // Large screens
 @media only screen and (min-width: 1024px) { 
-  } /* min-width 1025px, large screens */
+  
+} /* min-width 1025px, large screens */
 
 @media only screen and (min-width: 1024px) and (max-width: 90em) { 
-  } /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+  
+} /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */

@@ -1,16 +1,21 @@
 <h2>My Events</h2>
 
 <ol>
-  <% @jb_events.each do |j| %>
+  <% @jb_events.each_with_index do |j, i| %>
     <li>
-        <li><%= j %></li>    
-
-          <% j[:event_artists].each do |a| %>
-              <li><%= a['Name'] %></li>
-          <% end %>
-          
-        <li><%= j[:event_venue] %></li>
-        <li><%= j[:event_date] %></li>
+      <ul>   
+          <li>Artists:
+            <ol>
+              <% j[:event_artists].each do |a| %>
+                <li><%= a['Name'] %></li>
+              <% end %>
+            </ol>
+          </li>
+          <li>Venue: <%= j[:event_venue]['Name'] %></li>
+          <li>Date: <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %></li>
+          <li><%= link_to("Group Chat", event_group_messages_path(@user_events[i].event_id), method: :get) %></li>
+      </ul>
     </li>
-    <% end %>
+    <br>
+  <% end %>
 </ol>

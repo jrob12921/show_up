@@ -1,10 +1,13 @@
 class GroupMessagesController < ApplicationController
   
+  require "search"
+
   before_action :set_user, only: [:index]
 
   def index
     # Don't know if I will need
     @event = Event.find(params[:event_id])
+    @event_info = ::Search.new.find_event_by_id(@event.jb_event_id)
     # @group_messages = GroupMessage.where(user_id: )
 
     @group_messages = GroupMessage.where(event_id: @event.id, user_id: @user.id)

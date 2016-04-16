@@ -1,5 +1,7 @@
 <h3>Group Message:</h3>
 
+<h4><%= @event_info %><h4>
+
 <%= form_for :group_message, remote: true do |ngm| %>
   <%= ngm.hidden_field :event_id, value: @event.id %>
   <%= ngm.hidden_field :user_id, value: @user.id %>
@@ -20,7 +22,7 @@
             <strong><em>
               <div>
                 <% if gm.user.id == @user.id %>
-                  You
+                  Mw
                 <% else %>
                   <%= gm.user.name %>
                 <% end %>
