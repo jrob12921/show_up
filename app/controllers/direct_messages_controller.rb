@@ -5,9 +5,13 @@ class DirectMessagesController < ApplicationController
   end
 
   # To show all my chats
-  def index
+  def my_chats
     @my_chat_partners = DirectMessage.where(sender_id: current_user.id).pluck(:recipient_id).uniq
+  end
 
+  # used for a single event
+  def index
+    
   end
 
   # Not sure if I will use this

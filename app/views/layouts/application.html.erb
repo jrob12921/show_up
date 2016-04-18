@@ -16,20 +16,20 @@
   <%= display_flash_messages %>
 
   <nav class="top-bar" id="main_nav">
-    <span class="page_header"><%= @page_header ||= "MeetB4theShow" %></span>
+    <span class="page_header"><%= @page_header ||= "Show UP!" %></span>
     <div class="top-bar-right" id="prof_pic">
       <ul class="dropdown menu" data-dropdown-menu>
         <li>
           <% if user_signed_in? %>
             <%= image_tag current_user.image %>
           <% else %>
-            <li><%= link_to('Login/Sign Up', new_user_session_path, method: :get) %></li>
+            <li><%= link_to('Login/Sign Up', new_user_session_path, method: :get, class: "button") %></li>
           <% end %>
             <ul class="dropdown menu" data-dropdown-menu>
               <% if user_signed_in? %>
                 <li><%= link_to('My Events', user_events_path, method: :get) %></li>
                 <li><%= link_to('Search', root_path, method: :get) %></li>
-                <li><%= link_to('My Chats', direct_message_path(current_user.id), method: :get) %></li>
+                <li><%= link_to('My Chats', my_chats_path(current_user.id), method: :get) %></li>
                 <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
               <% end %>
             </ul>
@@ -39,6 +39,13 @@
   </nav>
 
   <%= yield %>
+  
+  <br>
+
+  <!-- JamBase Attribution -->
+  <div>Powered By:</div>
+  <a href="http://www.JamBase.com" target="_top" title="JamBase Concert Search">
+  <img src= "http://images.jambase.com/logos/jambase140x70.gif" alt="Search JamBase Concerts" border="0" /></a>
 
   </body>
 </html>
