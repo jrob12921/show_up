@@ -62,8 +62,8 @@
   }
 
   .gm_info {
-      border-left: 1px solid black;
-    }
+    border-left: 1px solid black;
+  }
 
   .single_group_message {
     background-color: $green;
@@ -104,6 +104,41 @@
     }
 
   }
+
+  .background_wrapper_1 {
+    background-image: url("/assets/music_bg_1.jpg");
+    background-size: cover;
+  }
+
+  .background_wrapper_2 {
+    background-image: url("/assets/music_bg_2.jpg");
+    background-size: cover;
+  }
+
+  .background_parallax {
+    background-image: url("/assets/music_parallax.jpg");
+    background-size: cover;
+    height: 200px;
+  }
+
+  .app_info{
+    color: white;
+    text-shadow: 2px 2px 3px black;
+
+    h3 {
+      text-align: center;
+    }
+  }
+
+  .search_form {
+    form label {
+      color: white;
+      text-shadow: 2px 2px 3px black;
+    }
+  }
+
+
+
 
 
 

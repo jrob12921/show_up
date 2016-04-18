@@ -14,11 +14,13 @@ Rails.application.routes.draw do
 
   resources :events do 
     resources :group_messages
+    resources :direct_messages
   end
-  resources :direct_messages
   resources :user_events
 
   get 'single_dm/:sender_id/:recipient_id' => "direct_messages#single_dm", as: 'single_dm'
+
+  get 'my_chats/:id' => "direct_messages#my_chats", as: 'my_chats'
 
   
   # You can have the root of your site routed with "root"

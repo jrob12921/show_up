@@ -1,38 +1,56 @@
-<h2>
-  <% if user_signed_in? %>
-    Welcome back, <%= current_user.name.split(" ").first %>!
-  <% else %>
-    Please sign in or sign up!
-  <% end %>
-</h2>
-
-<h3>Try searching some stuff...</h3>
-
-<%= form_tag("/results", method: "get") do %>
-
-  <%= label_tag(:q_name, "Search Artists and Venues by Name:") %>
-  <%= text_field_tag(:q_name) %>
-
-  <%= submit_tag("Search!") %>
-<% end %>
-<br>
-<div>OR</div>
-
-<%= form_tag("/results", method: "get") do %>
+<div class="background_wrapper_1">
   
-  <%= label_tag(:q_zip_code, "Search Events and Venues by Zip Code:") %>
-  <%= text_field_tag(:q_zip_code) %>
+  <div class="row">
+    <h2>
+      <% if user_signed_in? %>
+        Welcome back, <%= current_user.name.split(" ").first %>!
+      <% else %>
+        Please sign in or sign up!
+      <% end %>
+    </h2>
+  </div>
 
-  <%= submit_tag("Search!") %>
-<% end %>
+  <div class="row">
+    <h3>Try a Search!</h3>
+  </div>
 
-<br>
+  <div class="search_form">
+
+    <%= form_tag("/results", method: "get") do %>
+
+      <%= label_tag(:q_name, "Search Artists and Venues by Name:") %>
+      <%= text_field_tag(:q_name) %>
+
+      <%= submit_tag("Search!", class: "button") %>
+    <% end %>
+
+  </div>
+  
+  <div class="search_form">
+
+    <%= form_tag("/results", method: "get") do %>
+      
+      <%= label_tag(:q_zip_code, "Search Events and Venues by Zip Code:") %>
+      <%= text_field_tag(:q_zip_code) %>
+
+      <%= submit_tag("Search!", class: "button") %>
+    <% end %>
+
+  </div>
+
+</div>
+
+<div class="background_parallax"></div>
+
+<div class="background_wrapper_2">
+
+  <div class="app_info row">
+    <h3>Learn More</h3>
+    <p>Have you been to shy to go to a concert alone?  Well now you don't have to be!</p>
+    <p>With Show UP! &trade; you can meet before the show!</p>
+  </div>
+
+</div>
 
 
-<br>
 
-
-<!-- JamBase Attribution -->
-<div>Powered By:</div>
-<a href="http://www.JamBase.com" target="_top" title="JamBase Concert Search">
-<img src= "http://images.jambase.com/logos/jambase140x70.gif" alt="Search JamBase Concerts" border="0" /></a>
