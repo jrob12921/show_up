@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Show Up!" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Show UP!" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
@@ -16,7 +16,7 @@
   <%= display_flash_messages %>
 
   <nav class="top-bar" id="main_nav">
-    <span class="page_header"><%= @page_header ||= "Show UP!" %></span>
+    <span class="page_header"><%= @page_header ||= "Show Up" %></span>
     <div class="top-bar-right" id="prof_pic">
       <ul class="dropdown menu" data-dropdown-menu>
         <li>

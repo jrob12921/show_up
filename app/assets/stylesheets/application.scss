@@ -18,6 +18,10 @@
 
   $light_green: #3adb76;
   $light_orange: #ffc966;
+  $magenta: #D32BAC;
+  $light_blue: #0565E4;
+  $dark_blue: #0011AE;
+
   //rainbow pallette
   $red: #f25c5c;
   $orange: #f6ab53;
@@ -25,7 +29,23 @@
   $turkuaz: #30b4c9;
   $purple: #ad85d2;
 
+  @font-face {
+    font-family: 'AlphaMusicMan';
+    src: font-url('AlphaMusicMan.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
 
+  @font-face {
+    font-family: 'DTNOTED';
+    src: font-url('DTNOTED.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .page_header {
+    font-family: 'DTNOTED';
+  }
 
 
 
@@ -92,7 +112,8 @@
   }
 
   #main_nav {
-    background-color: $green;
+    background-color: $magenta;
+    color: white;
   }
 
   a {
@@ -132,11 +153,16 @@
 
   .search_form {
     form label {
+      font-size: 16px;
       color: white;
-      text-shadow: 2px 2px 3px black;
+      text-shadow: 2px 2px 3px $dark_blue;
+      -webkit-text-stroke: .01em black;
     }
   }
 
+  .heading {
+    color: $dark_blue;
+  }
 
 
 
