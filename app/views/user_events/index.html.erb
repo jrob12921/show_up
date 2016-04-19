@@ -13,7 +13,7 @@
           </li>
           <li>Venue: <%= j[:event_venue]['Name'] %></li>
           <li>Date: <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %></li>
-          <li><%= link_to("Group Chat", event_group_messages_path(@user_events[i].event_id), method: :get) %></li>
+          <li><%= link_to("See the Group Chat!!", event_group_messages_path(@user_events[i].event_id), method: :get) %></li>
       </ul>
     </li>
     <br>

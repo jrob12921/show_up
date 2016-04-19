@@ -5,6 +5,11 @@ class UserEventsController < ApplicationController
 
   require "search"
 
+  def my_events
+    @user_events = UserEvent.where(user_id: @user_id)
+  end
+
+  # my_events page
   def index
     @user_events = UserEvent.where(user_id: @user.id)
     # don't know if i will actually use this
@@ -46,7 +51,7 @@ class UserEventsController < ApplicationController
 
     @group_message = GroupMessage.where(event_id: @event.id, user_id: @user.id)
 
-    @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
+    # @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
 
   end
 
@@ -76,23 +81,11 @@ class UserEventsController < ApplicationController
   end
 
   def destroy
-    @user_event = Event.find_by(jb_event_id: @event.jb_event_id, user_id: @user.id)
+    @user_event = UserEvent.find(params[:id])
 
     @user_event.destroy
 
-    if @user_event.destroy
-      # flash[:message] = "You are no longer attending this event!"
-      
-      # respond_to do |format|
-      #   format.js
-      # end    
-
-      redirect_to event_path(@event.id)
-      
-    else
-      flash[:message] = "There was a problem..."
-      redirect_to event_path(@event.id)
-    end
+    redirect_to root_path
   end
 
   private
@@ -106,7 +99,7 @@ class UserEventsController < ApplicationController
   end
 
   def set_event
-    @event = Event.find(params[:id])
+    @event = UserEvent.find(params[:id]).event
   end
 
 end

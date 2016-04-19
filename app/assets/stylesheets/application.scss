@@ -152,7 +152,7 @@
     font-size: 30px;
   }
 
-   a {
+  li > a {
       text-shadow: 2px 2px 3px black;
     }
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
@@ -164,7 +164,7 @@
     font-size: 54px;
   }
 
-   a:hover {
+   li > a:hover {
       text-shadow: 1px 1px 1px black;
     }
 

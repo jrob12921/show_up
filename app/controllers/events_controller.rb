@@ -35,10 +35,14 @@ class EventsController < ApplicationController
 
     @marquee = "<strong>#{@artist_names.join(", ")}</strong><br><strong>#{@event_venue['Name']}</strong><br><strong>#{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}</strong>"
 
-    # @group_messages = GroupMessage.where(event_id: @event.id, user_id: @user.id)
-    # @new_group_message = GroupMessage.new
+    @user_event = UserEvent.find_by(user_id: @user.id, event_id: @event.id) 
 
-    # @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
+     @user_event.present? ? @user_going = true : @user_going = false
+
+    # Ask orlando about this. 
+    # There might be a way to use "build" so that the link can exist without creating the record
+     @user_event = UserEvent.find_or_create_by(user_id: @user.id, event_id: @event.id) 
+
 
   end
 

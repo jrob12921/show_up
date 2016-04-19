@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   get 'my_chats/:id' => "direct_messages#my_chats", as: 'my_chats'
 
+
+  get 'my_events/:id' => "user_events#my_events", as: 'my_events'
   
   # You can have the root of your site routed with "root"
   root 'search#index'

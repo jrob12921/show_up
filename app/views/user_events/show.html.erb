@@ -29,16 +29,20 @@
 
 <div class="row">
   <div class="attend_button_container">
-      <%= link_to("I am no longer going to this event!", user_event_path(@event.id), method: :delete, class: "large button unattend alert expanded") %>
+      <%= link_to("I am no longer going to this event!", user_event_path(params[:id]), method: :delete, class: "large button unattend alert expanded") %>      
   </div>
 </div>
 
 
 <br>
 
+<h4>More Options:</h4>
+<ul>
+  <li><%= link_to("Buy Tickets!", @event_url, method: :get) %></li>
 
-<div><%= link_to("Buy Tickets!", @event_url, method: :get) %></div>
+  <li><%= link_to("Event Group Chat", event_group_messages_path(@event.id), method: :get) %></li>
 
-<hr>
+  <li>LINK TO DM CYCLER</li>
 
-<div><%= link_to("Event Group Chat", event_group_messages_path(@event.id), method: :get) %></div>
+</ul>
+
