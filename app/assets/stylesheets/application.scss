@@ -108,7 +108,7 @@
   }
 
   body {
-    background-color: $turkuaz;
+    background-color: $light_blue;
   }
 
   #main_nav {
@@ -164,8 +164,20 @@
     color: $dark_blue;
   }
 
+  .users_image {
+    border: 2px solid white;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
 
+  .users_name {
+    color: white;
+    font-size: 24px;
+  }
 
+  .marquee {
+    color: white;
+  }
 
 
 // Small screens
@@ -178,9 +190,9 @@
     font-size: 30px;
   }
 
-  li > a {
-      text-shadow: 2px 2px 3px black;
-    }
+  // li > a {
+  //     text-shadow: 2px 2px 3px black;
+  //   }
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
 // Medium screens

@@ -42,8 +42,30 @@ class EventsController < ApplicationController
     # Ask orlando about this. 
     # There might be a way to use "build" so that the link can exist without creating the record
      @user_event = UserEvent.find_or_create_by(user_id: @user.id, event_id: @event.id) 
+  end
+
+  def event_users
+    @event = Event.find(params[:id])
+    @users = @event.users
+
+    @jb_event_id = @event.jb_event_id 
+
+    @event_info = ::Search.new.get_event_by_id(@jb_event_id)
 
 
+    @event_date = @event_info[:event_date]
+    @event_venue = @event_info[:event_venue]
+    @event_artists = @event_info[:event_artists]
+    @event_url = @event_info[:event_url]
+
+    @artist_names = []
+    # @artist_ids = []
+    @event_artists.each do |a|
+      @artist_names << a['Name']
+      # @artist_ids << a['Id']
+    end
+
+    @marquee = "<strong>#{@artist_names.join(", ")}</strong><br><strong>#{@event_venue['Name']}</strong><br><strong>#{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}</strong>"
   end
 
   def new

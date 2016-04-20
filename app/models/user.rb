@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :events
   has_many :group_messages
   has_many :sent_messages, class_name: "DirectMessage", foreign_key: "sender_id"
   has_many :received_messages, class_name: "DirectMessage", foreign_key: "recipient_id"
-
+  has_many :user_events
+  has_many :events, through: :user_events
 
 
   def self.from_omniauth(auth)

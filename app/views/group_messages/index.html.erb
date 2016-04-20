@@ -1,12 +1,14 @@
 <h4><%= @marquee.html_safe %><h4>
 
+<h3><%= link_to("See Who's Going!", event_users_path(@event.id), method: :get) %></h3>
+
 <h3>Group Message:</h3>
 
 <%= form_for :group_message, remote: true do |ngm| %>
   <%= ngm.hidden_field :event_id, value: @event.id %>
   <%= ngm.hidden_field :user_id, value: @user.id %>
-  <%= ngm.text_area :body, rows: 5, label: false %>
-  <%= ngm.submit :create, value: "Post", class: "radius secondary button"  %>
+  <%= ngm.text_area :body, rows: 3, label: false %>
+  <%= ngm.submit :create, value: "Post", class: "radius button"  %>
 <% end %>
 
 <div class="all_group_messages">

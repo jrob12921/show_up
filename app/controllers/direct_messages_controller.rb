@@ -1,7 +1,12 @@
 class DirectMessagesController < ApplicationController
 
   # Custon route to show only DMs based on specific user IDs
-  def single_dm
+  def user_history
+    @sender = 
+  end
+
+  def event_dm
+    @event = Event.find(params[:id])
   end
 
   # To show all my chats

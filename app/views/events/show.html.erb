@@ -6,9 +6,9 @@
   <div class="small-3 column attend_button_container">
     <!--  -->
     <% if @user_going %>
-      <%= link_to("You're Going to this Event", user_event_path(@user_event.id), method: :get, class: "large button attend") %>
+      <%= link_to("You're Going", user_event_path(@user_event.id), method: :get, class: "button attend") %>
     <% else %>
-      <%= link_to("I'm going!", user_event_path(@user_event.id), method: :get, class: "large button attend") %>
+      <%= link_to("I want to go!", user_event_path(@user_event.id), method: :get, class: "button attend") %>
     <% end %>
     <!-- End comments -->
   </div>

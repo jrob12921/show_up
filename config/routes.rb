@@ -18,12 +18,16 @@ Rails.application.routes.draw do
   end
   resources :user_events
 
-  get 'single_dm/:sender_id/:recipient_id' => "direct_messages#single_dm", as: 'single_dm'
+  get 'user_history/:sender_id/:recipient_id' => "direct_messages#user_history", as: 'user_history'
+
+  get 'event_dm/:event_id/:sender_id/:recipient_id' => "direct_messages#event_dm", as: 'event_dm'
 
   get 'my_chats/:id' => "direct_messages#my_chats", as: 'my_chats'
 
 
   get 'my_events/:id' => "user_events#my_events", as: 'my_events'
+
+  get 'event/:id/users' => "events#event_users", as: "event_users"
   
   # You can have the root of your site routed with "root"
   root 'search#index'
