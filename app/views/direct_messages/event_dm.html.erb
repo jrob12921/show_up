@@ -1,0 +1,40 @@
+<h4><%= @marquee.html_safe %><h4>
+
+<h3>Message <%= @other_user.name.split(" ").first %>:</h3>
+
+<%= form_for :direct_message, remote: true do |ndm| %>
+  <%= ndm.hidden_field :event_id, value: @event.id %>
+  <%= ndm.hidden_field :sender_id, value: @user.id %>
+  <%= ndm.hidden_field :recipient_id, value: @other_user.id %>
+  <%= ndm.text_area :body, rows: 3, label: false %>
+  <%= ndm.submit :create, value: "Post", class: "radius button"  %>
+<% end %>
+
+<div class="all_messages">
+  <% if @aggregate_messages.present? %>  
+    <% @aggregate_messages.reverse_each do |dm| %>
+      <% if dm.user.id == @user.id %>
+        <div class="single_message mine row">
+      <% else %>
+        <div class="single_message row">
+      <% end %>
+          <div class="msg_body small-8 column"><%= dm.body %></div>
+          <div class="msg_info small-4 column">
+            <strong><em>
+              <div>
+                <% if dm.user.id == @user.id %>
+                  Yours Truly
+                <% else %>
+                  <%= dm.user.name %>
+                <% end %>
+              </div>
+              <div><%= dm.created_at.strftime("%-m/%-d/%y") %></div>
+              <div><%= dm.created_at.strftime("%-I:%M:%S %P") %></div>
+            </em></strong>
+          </div>
+        </div>
+    <% end %>
+  <% else %>
+    <div>There are no messages yet. Post something!</div>
+  <% end %>
+</div>

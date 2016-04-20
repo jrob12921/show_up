@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414190333) do
+ActiveRecord::Schema.define(version: 20160420145246) do
 
   create_table "direct_messages", force: :cascade do |t|
     t.integer  "sender_id"
@@ -19,7 +19,10 @@ ActiveRecord::Schema.define(version: 20160414190333) do
     t.text     "body"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "event_id"
   end
+
+  add_index "direct_messages", ["event_id"], name: "index_direct_messages_on_event_id"
 
   create_table "events", force: :cascade do |t|
     t.integer  "jb_event_id"
@@ -43,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160414190333) do
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "attending"
   end
 
   add_index "user_events", ["event_id"], name: "index_user_events_on_event_id"

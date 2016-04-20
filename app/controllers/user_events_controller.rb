@@ -91,7 +91,7 @@ class UserEventsController < ApplicationController
   private
 
   def event_params
-    parms.require(:event).permit(:user_id, :event_id)
+    parms.require(:event).permit(:user_id, :event_id, :attending)
   end
 
   def set_user
