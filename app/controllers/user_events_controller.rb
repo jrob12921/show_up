@@ -11,7 +11,7 @@ class UserEventsController < ApplicationController
 
   # my_events page
   def index
-    @user_events = UserEvent.where(user_id: @user.id)
+    @user_events = UserEvent.where(user_id: @user.id, attending: true )
     # don't know if i will actually use this
     @jb_event_ids = []
     @user_events.each do |ue|
@@ -23,11 +23,12 @@ class UserEventsController < ApplicationController
       @jb_events << ::Search.new.get_event_by_id(j)
     end
 
-
   end
 
   def show
-    @user_event = UserEvent.find_or_create_by(event_id: @event.id, user_id: @user.id)
+    @user_event = UserEvent.find_by(event_id: @event.id, user_id: @user.id)
+
+    # @user_event.update(attending: true)
 
     @all_users = UserEvent.where(event_id: @event.id)
 
@@ -51,7 +52,7 @@ class UserEventsController < ApplicationController
 
     @group_message = GroupMessage.where(event_id: @event.id, user_id: @user.id)
 
-    # @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
+    @user_event.attending == true ? @user_going = true : @user_going = false
 
   end
 
@@ -86,6 +87,19 @@ class UserEventsController < ApplicationController
     @user_event.destroy
 
     redirect_to root_path
+  end
+
+  def attend
+    @user_event = UserEvent.find(params[:id])
+    @user_event.update(attending: true)
+    redirect_to user_event_path(@user_event.id)
+
+  end
+
+  def unattend
+    @user_event = UserEvent.find(params[:id])
+    @user_event.update(attending: false)
+    redirect_to event_path(@user_event.event.jb_event_id)
   end
 
   private

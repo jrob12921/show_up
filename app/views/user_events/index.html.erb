@@ -4,6 +4,7 @@
   <% @jb_events.each_with_index do |j, i| %>
     <li>
       <ul>   
+          <li><%= link_to("Event Page", event_path(j[:jb_event_id]), method: :get) %></li>
           <li>Artists:
             <ol>
               <% j[:event_artists].each do |a| %>

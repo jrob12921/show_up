@@ -39,7 +39,7 @@ class GroupMessagesController < ApplicationController
 
   def create
     @group_message = GroupMessage.find_or_create_by(group_message_params)
-    @group_message.save
+    @group_message.save  
 
     if @group_message.save
       # flash[:message] = "Message Posted Successfully"

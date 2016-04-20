@@ -8,7 +8,7 @@
     <% if @user_going %>
       <%= link_to("You're Going", user_event_path(@user_event.id), method: :get, class: "button attend") %>
     <% else %>
-      <%= link_to("I want to go!", user_event_path(@user_event.id), method: :get, class: "button attend") %>
+      <%= link_to("I want to go!", attend_path(@user_event.id), method: :post, class: "button attend") %>
     <% end %>
     <!-- End comments -->
   </div>

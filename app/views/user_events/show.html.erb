@@ -29,7 +29,9 @@
 
 <div class="row">
   <div class="attend_button_container">
-      <%= link_to("I am no longer going to this event!", user_event_path(params[:id]), method: :delete, class: "large button unattend alert expanded") %>      
+    <% if @user_going %>
+      <%= link_to("I am no longer going to this event!", unattend_path(params[:id]), method: :post, class: "large button unattend alert expanded") %>  
+      <% end %>    
   </div>
 </div>
 

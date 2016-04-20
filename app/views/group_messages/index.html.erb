@@ -11,16 +11,17 @@
   <%= ngm.submit :create, value: "Post", class: "radius button"  %>
 <% end %>
 
-<div class="all_group_messages">
+<div class="all_messages">
   <% if @group_messages.present? %>  
     <% @group_messages.reverse_each do |gm| %>
       <% if gm.user.id == @user.id %>
-        <div class="single_group_message mine row">
+        <div class="single_message mine row">
       <% else %>
-        <div class="single_group_message row">
+        <div class="single_message row">
       <% end %>
-          <div class="gm_body small-8 column"><%= gm.body %></div>
-          <div class="gm_info small-4 column">
+          <div class="msg_body small-8 column"><%= gm.body %></div>
+
+          <div class="msg_info small-4 column">
             <strong><em>
               <div>
                 <% if gm.user.id == @user.id %>
@@ -33,6 +34,7 @@
               <div><%= gm.created_at.strftime("%-I:%M:%S %P") %></div>
             </em></strong>
           </div>
+
         </div>
     <% end %>
   <% else %>

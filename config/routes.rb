@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   get 'my_events/:id' => "user_events#my_events", as: 'my_events'
 
   get 'event/:id/users' => "events#event_users", as: "event_users"
+
+  post 'attend/:id' => "user_events#attend", as: "attend"
+  post 'unattend/:id' => "user_events#unattend", as: "unattend"
   
   # You can have the root of your site routed with "root"
   root 'search#index'

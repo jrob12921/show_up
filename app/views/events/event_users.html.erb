@@ -1,7 +1,7 @@
 <h2 class="marquee"><%= @marquee.html_safe %></h2>
 
 <ul>
-  <% @users.each do |u| %>
+  <% @event_users.each do |u| %>
     <li><%= image_tag u.image, class: "users_image" %> <span class="users_name"><%= u.name %> <%= link_to("Send #{u.name.split(' ').first} a Message!", event_dm_path(@event.id, current_user.id, u.id), method: :get, class: "button") if current_user.id != u.id %></span></li>
   <% end %>
 </ul>

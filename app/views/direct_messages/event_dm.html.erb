@@ -1,6 +1,6 @@
 <h4><%= @marquee.html_safe %><h4>
 
-<h3>Message <%= @other_user.name.split(" ").first %>:</h3>
+<h3>Message <%= @other_user.name %>:</h3>
 
 <%= form_for :direct_message, remote: true do |ndm| %>
   <%= ndm.hidden_field :event_id, value: @event.id %>
@@ -13,26 +13,34 @@
 <div class="all_messages">
   <% if @aggregate_messages.present? %>  
     <% @aggregate_messages.reverse_each do |dm| %>
-      <% if dm.user.id == @user.id %>
+      <% if dm.sender_id == @user.id %>
+      <!-- xxxxxxxxxxxxxx -->
         <div class="single_message mine row">
-      <% else %>
-        <div class="single_message row">
-      <% end %>
-          <div class="msg_body small-8 column"><%= dm.body %></div>
+          <div class="msg_body small-6 column"><%= dm.body %></div>
           <div class="msg_info small-4 column">
             <strong><em>
-              <div>
-                <% if dm.user.id == @user.id %>
-                  Yours Truly
-                <% else %>
-                  <%= dm.user.name %>
-                <% end %>
-              </div>
               <div><%= dm.created_at.strftime("%-m/%-d/%y") %></div>
               <div><%= dm.created_at.strftime("%-I:%M:%S %P") %></div>
             </em></strong>
           </div>
+          <div class="small-2 column img_cont">
+            <%= image_tag @user.image %>
+          </div>
         </div>
+      <% else %>
+        <div class="single_message other row">
+          <div class="msg_body small-6 column"><%= dm.body %></div>
+          <div class="msg_info small-4 column">
+            <strong><em>
+              <div><%= dm.created_at.strftime("%-m/%-d/%y") %></div>
+              <div><%= dm.created_at.strftime("%-I:%M:%S %P") %></div>
+            </em></strong>
+          </div>
+          <div class="small-2 column img_cont">
+            <%= image_tag @other_user.image %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   <% else %>
     <div>There are no messages yet. Post something!</div>
