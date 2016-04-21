@@ -40,6 +40,7 @@ class DirectMessagesController < ApplicationController
       @aggregate_messages << r
     end
     # @aggregate_messages.sort!
+    # How do you sort by date created field?
 
     @direct_message = DirectMessage.new
   end
@@ -79,9 +80,11 @@ class DirectMessagesController < ApplicationController
       @event_artists = @event_info[:event_artists]
       @artist_names = []
       # @artist_ids = []
-      @event_artists.each do |a|
-        @artist_names << a['Name']
-        # @artist_ids << a['Id']
+      if @event_artists.present?
+        @event_artists.each do |a|
+          @artist_names << a['Name']
+          # @artist_ids << a['Id']
+        end
       end
       i[:artist_names] = @artist_names
     end

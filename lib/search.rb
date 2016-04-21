@@ -107,7 +107,8 @@ class Search
     api_keys = [
       ENV['JAMBASE_API_KEY'],
       ENV['JAMBASE_API_KEY2'],
-      ENV['JAMBASE_API_KEY3']
+      ENV['JAMBASE_API_KEY3'],
+      ENV['JAMBASE_API_KEY4']
     ]
 
     api_keys.sample

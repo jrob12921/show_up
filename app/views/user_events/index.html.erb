@@ -1,22 +1,26 @@
 <h2>My Events</h2>
 
-<ol>
-  <% @jb_events.each_with_index do |j, i| %>
-    <li>
-      <ul>   
-          <li><%= link_to("Event Page", event_path(j[:jb_event_id]), method: :get) %></li>
-          <li>Artists:
-            <ol>
-              <% j[:event_artists].each do |a| %>
-                <li><%= a['Name'] %></li>
-              <% end %>
-            </ol>
-          </li>
-          <li>Venue: <%= j[:event_venue]['Name'] %></li>
-          <li>Date: <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %></li>
-          <li><%= link_to("See the Group Chat!!", event_group_messages_path(@user_events[i].event_id), method: :get) %></li>
-      </ul>
-    </li>
-    <br>
-  <% end %>
-</ol>
+<% if @jb_events[0][:jb_event_id] != 0 %>
+  <ol>
+    <% @jb_events.each_with_index do |j, i| %>
+      <li>
+        <ul>   
+            <li><%= link_to("Event Page", event_path(j[:jb_event_id]), method: :get) %></li>
+            <li>Artists:
+              <ol>
+                <% j[:event_artists].each do |a| %>
+                  <li><%= a['Name'] %></li>
+                <% end %>
+              </ol>
+            </li>
+            <li>Venue: <%= j[:event_venue]['Name'] %></li>
+            <li>Date: <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %></li>
+            <li><%= link_to("See the Group Chat!!", event_group_messages_path(@user_events[i].event_id), method: :get) %></li>
+        </ul>
+      </li>
+      <br>
+    <% end %>
+  </ol>
+<% else %>
+  <div>You're not going to any shows.  Time to <%= link_to("change", root_path, method: :get) %> that...</div>
+<% end %>
