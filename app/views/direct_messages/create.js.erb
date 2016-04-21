@@ -1,6 +1,6 @@
-$(".all_messages").prepend("<div class='single_message mine row'><div class='msg_body small-8 column'><%= @group_message.body %></div><div class='msg_info small-4 column'><strong><em><div>Yours Truly</div><div small-4 column'><%= @group_message.created_at.strftime('%-m/%-d/%y') %></div><div><%= @group_message.created_at.strftime('%-I:%M:%S %P') %></div></em></strong></div></div>")
+$(".all_messages").prepend("<%= j render(partial: 'new_dm') %>")
 
 
 $("form").on("ajax:complete", function(e){
-  $("#group_message_body").val('')
+  $("#direct_message_body").val('')
 })

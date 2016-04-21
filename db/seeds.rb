@@ -11,8 +11,8 @@
 
 
 events = [
-  [2724085], # 6/25 Dead & Co @ Citi Field
-  [2724086] # 6/26 Dead & Co @ Citi Field
+  2724085, # 6/25 Dead & Co @ Citi Field
+  2724086 # 6/26 Dead & Co @ Citi Field
 ]
 
 Event.destroy_all

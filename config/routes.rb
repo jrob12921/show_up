@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'user_history/:sender_id/:recipient_id' => "direct_messages#user_history", as: 'user_history'
 
   get 'event_dm/:event_id/:sender_id/:recipient_id' => "direct_messages#event_dm", as: 'event_dm'
+  
+  post 'event_dm/:event_id/:sender_id/:recipient_id' => "direct_messages#create"
 
   get 'my_chats/:id' => "direct_messages#my_chats", as: 'my_chats'
 

@@ -1,0 +1,19 @@
+<div class='single_message mine row'>
+  
+  <div class='msg_body small-8 column'><%= @group_message.body %></div>
+
+  <div class='msg_info small-4 column'>
+    
+    <strong><em>
+      
+      <div>Yours Truly</div>
+
+      <div><%= @group_message.created_at.strftime('%-m/%-d/%y') %></div>
+
+      <div><%= @group_message.created_at.strftime('%-I:%M:%S %P') %></div>
+  
+    </em></strong>
+
+  </div>
+
+</div>

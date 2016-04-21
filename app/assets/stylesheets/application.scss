@@ -43,6 +43,11 @@
     font-style: normal;
   }
 
+  html {
+    height: 100%;
+    width: 100%;
+  }
+
   .page_header {
     font-family: 'DTNOTED';
   }
@@ -89,6 +94,7 @@
     // background-color: $magenta;
     border: 1px solid black;
     margin-bottom: 5px;
+    height: 100%;
     // color: white;
 
     .msg_info {
@@ -97,46 +103,58 @@
   }
 
   .mine {
-    background-color: $orange;
+    // background-color: $orange;
+    background: linear-gradient(to right, $orange, $magenta);
 
     .msg_info {
-      background-color: $magenta;
-      color: white;
+      // background-color: $magenta;
+      // color: white;
     }
 
     .msg_body {
       // color: white; 
     }
+
+    .img_cont {
+      padding-right: 0;
+    }
   }
 
   .other {
-    background-color: $magenta;
+    // background-color: $magenta;
+    background: linear-gradient(to right, $magenta, $orange);
+
+    // color: white;
 
     .msg_info {
-      background-color: $orange;
+      // background-color: $orange;
     }
 
     .msg_body {
-      color: white;
+      // color: white;
+    }
+
+    .img_cont {
+      padding-left: 0;
     }
   }
 
   .msg_info {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    font-size: 12px;
+    // border-left: 1px solid black;
+    // border-right: 1px solid black;
+    font-size: 10px;
   }
 
-  .img_cont {
-    img {
-      // width: 100%;
-      // height: 100%;
-    }
-  }
+
 
   body {
+    height: 100%;
+    margin: 0;
     background: $light_blue;
     background: linear-gradient(to bottom right, $light_blue, $light_green);
+    // background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
   }
 
@@ -156,13 +174,24 @@
   }
 
   .background_wrapper_1 {
-    background-image: url("/assets/music_bg_1.jpg");
+    background-image: url("/assets/music_bg_2.jpg");
     background-size: cover;
   }
 
   .background_wrapper_2 {
-    background-image: url("/assets/music_bg_2.jpg");
+    background-image: url("/assets/music_bg_1.jpg");
     background-size: cover;
+
+    h3, p {
+      font-size: 16px;
+      color: white;
+      text-shadow: 2px 2px 3px $dark_blue;
+      -webkit-text-stroke: .01em black;
+    }
+
+    h3 {
+      font-size: 24px;
+    }
   }
 
   .background_parallax {
@@ -180,13 +209,11 @@
     }
   }
 
-  .search_form {
-    form label {
+  .search_form form label {
       font-size: 16px;
       color: white;
       text-shadow: 2px 2px 3px $dark_blue;
       -webkit-text-stroke: .01em black;
-    }
   }
 
   .heading {
@@ -249,3 +276,8 @@
 @media only screen and (min-width: 1024px) and (max-width: 90em) { 
   
 } /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+
+
+a {
+  text-decoration: underline;
+}

@@ -16,8 +16,8 @@
       <% if dm.sender_id == @user.id %>
       <!-- xxxxxxxxxxxxxx -->
         <div class="single_message mine row">
-          <div class="msg_body small-6 column"><%= dm.body %></div>
-          <div class="msg_info small-4 column">
+          <div class="msg_body small-7 column"><%= dm.body %></div>
+          <div class="msg_info small-3 column">
             <strong><em>
               <div><%= dm.created_at.strftime("%-m/%-d/%y") %></div>
               <div><%= dm.created_at.strftime("%-I:%M:%S %P") %></div>
@@ -29,16 +29,16 @@
         </div>
       <% else %>
         <div class="single_message other row">
-          <div class="msg_body small-6 column"><%= dm.body %></div>
-          <div class="msg_info small-4 column">
+          <div class="small-2 column img_cont">
+            <%= image_tag @other_user.image %>
+          </div>
+          <div class="msg_info small-3 column">
             <strong><em>
               <div><%= dm.created_at.strftime("%-m/%-d/%y") %></div>
               <div><%= dm.created_at.strftime("%-I:%M:%S %P") %></div>
             </em></strong>
           </div>
-          <div class="small-2 column img_cont">
-            <%= image_tag @other_user.image %>
-          </div>
+          <div class="msg_body small-7 column"><%= dm.body %></div>
         </div>
       <% end %>
     <% end %>

@@ -39,31 +39,13 @@ class DirectMessagesController < ApplicationController
     @received_messages.each do |r|
       @aggregate_messages << r
     end
-    # @aggregate_messages.sort!
-    # How do you sort by date created field?
+    @aggregate_messages.sort_by! {|msg| msg[:created_at]}
 
     @direct_message = DirectMessage.new
   end
 
   # To show all my chats
   def my_chats
-    # @chat_partners = []
-    # @sent = DirectMessage.where(sender_id: @user.id)
-    # @received = DirectMessage.where(recipient_id: @user.id)
-
-    # @sent.each do |m|
-    #   @chat_partners << User.find(m.recipient_id)
-    # end
-
-    # @received.each do |m|
-    #   @chat_partners << User.find(m.sender_id)
-    # end
-
-    # @chat_partners.uniq!
-
-    # @events = []
-    # @chat_partners.each do |p|
-
     @items = []
 
     @user_events = UserEvent.where(user_id: @user.id)
@@ -95,11 +77,11 @@ class DirectMessagesController < ApplicationController
       @partners = []
 
       @sent.each do |s|
-        @partners << s.recipient_id
+        @partners << {partner_id: s.recipient_id, partner_name: User.find(s.recipient_id).name}
       end
 
       @received.each do |r|
-        @partners << r.sender_id
+        @partners << {partner_id: r.sender_id, partner_name: User.find(r.sender_id).name}
       end
 
       i[:chat_partners] = @partners.uniq
@@ -123,8 +105,7 @@ class DirectMessagesController < ApplicationController
   end
 
   def create
-    @direct_message = DirectMessage.new(direct_message_params)
-    @direct_message.save
+    @direct_message = DirectMessage.create(direct_message_params)
 
     if @direct_message.save
       
@@ -132,6 +113,8 @@ class DirectMessagesController < ApplicationController
         format.js
       end    
       
+      # redirect_to event_dm_path(@direct_message.event_id, @direct_message.sender_id, @direct_message.recipient_id)
+
     else
       flash[:message] = "There was a problem..."
       redirect_to :back
