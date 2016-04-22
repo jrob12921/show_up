@@ -23,7 +23,7 @@ $(document).ready(function(){
 
   $(window).scroll(function(){
 
-    distance =  $(window).scrollTop() * (-.5) 
+    distance =  $(window).scrollTop() * (-.25) 
 
     $(".background_parallax").css("background-position", "0px " + distance + "px")
 
