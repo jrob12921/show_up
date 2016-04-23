@@ -25,6 +25,5 @@ module JambaseTest
 
     config.autoload_paths << "#{Rails.root}/lib"
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.serve_static_assets = true
   end
 end
