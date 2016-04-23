@@ -56,4 +56,6 @@ gem "omniauth-facebook"
 gem 'foundation-rails'
 gem 'foundation_rails_helper'
 
-gem 'rails_12factor', group: :production
+gem 'rails_12factor'
+
+gem 'puma'
