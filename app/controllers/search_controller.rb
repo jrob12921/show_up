@@ -19,12 +19,25 @@ class SearchController < ApplicationController
       @venue_results = @name_results[1]
 
     elsif params[:q_zip_code].present?
+
       @zip_code = params[:q_zip_code] 
-      @zip_results = Rails.cache.fetch(:zip_results, expires_in: 24.hours) do
-       ::Search.new.search_by_zip(@zip_code)
+      if !@zip_code.present?
+        flash[:message] = "Please type SOMETHING before you hit search."
+
+      elsif valid_zip?(@zip_code)
+
+        # @zip_results = Rails.cache.fetch(:zip_results, expires_in: 24.hours) do
+        #  ::Search.new.search_by_zip(@zip_code)
+        # end
+        @zip_results = ::Search.new.search_by_zip(@zip_code)
+
+        @venue_results = @zip_results[0]
+        @event_results = @zip_results[1]
+
+      else
+        flash[:message] = "Please enter a 5-digit number if you want to search by ZIP Code!"
+        redirect_to root_path
       end
-      @venue_results = @zip_results[0]
-      @event_results = @zip_results[1]
 
     end
   end
@@ -71,6 +84,12 @@ class SearchController < ApplicationController
   end
 
   def local_events
+  end
+
+  private
+
+  def valid_zip?(zip)
+    zip.length == 5
   end
 
 end

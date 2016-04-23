@@ -19,7 +19,7 @@ $(function(){
   $(document).foundation(); 
 });
 
-$(document).ready(function() {
+$(document).ready(function(){
 
   $(window).scroll(function(){
 

@@ -1,0 +1,23 @@
+<h2>My Chats</h2>
+
+<ul>
+  <% @items.each do |i| %>
+    <% if i[:event_venue].present? && i[:chat_partners].length > 0 %>
+      <% if i[:artist_names].length > 1 %>
+        <li><%= i[:artist_names].join(", ") %> 
+      <% else %>
+        <li><%= i[:artist_names][0] %> 
+      <% end %>
+      
+      <span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime("%-m/%-d/%y") %></li>
+        
+      <ol>  
+        <% i[:chat_partners].each do |cp| %>
+          <li><%= link_to(cp[:partner_name], event_dm_path(i[:event_id], current_user.id, cp[:partner_id]), method: :get) %></li>
+        <% end %>
+      </ol>
+    <% else %>
+      <div>You have no chats!</div>
+    <% end %>
+  <% end %>
+</ul>

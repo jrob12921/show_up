@@ -18,6 +18,10 @@
 
   $light_green: #3adb76;
   $light_orange: #ffc966;
+  $magenta: #D32BAC;
+  $light_blue: #0565E4;
+  $dark_blue: #0011AE;
+
   //rainbow pallette
   $red: #f25c5c;
   $orange: #f6ab53;
@@ -25,9 +29,25 @@
   $turkuaz: #30b4c9;
   $purple: #ad85d2;
 
+  @font-face {
+    font-family: 'MARQUEE';
+    src: font-url('MARQUEE.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
 
+  html {
+    height: 100%;
+    width: 100%;
+  }
 
+  .page_header {
+    font-family: 'MARQUEE';
+  }
 
+  h1, h2, h3, h4, h5, h6, li, div, span, a, a:link, a:visited, a:hover {
+    color: white;
+  }
 
   .top-bar-right {
      width: inherit;
@@ -65,64 +85,103 @@
     border-left: 1px solid black;
   }
 
-  .single_group_message {
-    background-color: $green;
+  .single_message {
     border: 1px solid black;
     margin-bottom: 5px;
+    height: 100%;
 
-    .gm_info {
-      border-left: 1px solid black;
-      background-color: $orange
+    .msg_info {
     }
-
   }
 
   .mine {
-    background-color: $orange;
+    background: linear-gradient(to right, $orange, $magenta);
 
-    .gm_info {
-      border-left: 1px solid black;
-      background-color: $green
+    .msg_info {
     }
 
+    .msg_body {
+    }
+
+    .img_cont {
+      padding-right: 0;
+    }
   }
 
+  .other {
+    background: linear-gradient(to right, $magenta, $orange);
+
+    .msg_info {
+    }
+
+    .msg_body {
+    }
+
+    .img_cont {
+      padding-left: 0;
+    }
+  }
+
+  .msg_info {
+    font-size: 10px;
+  }
+
+
+
   body {
-    background-color: $turkuaz;
+    height: 100%;
+    margin: 0;
+    background: $light_blue;
+    background: linear-gradient(to bottom right, $light_blue, $light_green);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
   }
 
   #main_nav {
-    background-color: $green;
+    background-color: $magenta;
   }
 
   a {
-    
-    // font-style: oblique;
-
     &:link, &:visited {
       color: black;
     }
+  }
 
+  a.button {
+    &:link, &:visited {
+      color: white;
+      text-decoration: none;
+    }
   }
 
   .background_wrapper_1 {
-    background-image: url("/assets/music_bg_1.jpg");
+    background-image: url("/assets/bw_crowd_bg.jpg");
     background-size: cover;
   }
 
   .background_wrapper_2 {
-    background-image: url("/assets/music_bg_2.jpg");
+    background-image: url("/assets/heart_bg.jpg");
     background-size: cover;
+
+    h3, p {
+      font-size: 16px;
+      text-shadow: 2px 2px 3px $dark_blue;
+      -webkit-text-stroke: .01em black;
+    }
+
+    h3 {
+      font-size: 24px;
+    }
   }
 
   .background_parallax {
-    background-image: url("/assets/music_parallax.jpg");
+    background-image: url("/assets/concert_bg_1.jpg");
     background-size: cover;
-    height: 200px;
+    height: 100px;
   }
 
   .app_info{
-    color: white;
     text-shadow: 2px 2px 3px black;
 
     h3 {
@@ -130,16 +189,31 @@
     }
   }
 
-  .search_form {
-    form label {
+  .search_form form label {
+      font-size: 16px;
       color: white;
-      text-shadow: 2px 2px 3px black;
-    }
+      text-shadow: 2px 2px 3px $dark_blue;
+      -webkit-text-stroke: .01em black;
   }
 
+  .users_image {
+    border: 2px solid white;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
 
+  .users_name {
+    font-size: 24px;
+  }
 
+  .custom {
+      background: linear-gradient(to right, $magenta, $orange);
+  }
 
+  .event_container {
+    background-image: url("/assets/yellow_light_bg");
+    background-size: 100%;
+  }
 
 
 // Small screens
@@ -152,9 +226,9 @@
     font-size: 30px;
   }
 
-   a {
-      text-shadow: 2px 2px 3px black;
-    }
+  // li > a {
+  //     text-shadow: 2px 2px 3px black;
+  //   }
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
 // Medium screens
@@ -164,9 +238,18 @@
     font-size: 54px;
   }
 
-   a:hover {
-      text-shadow: 1px 1px 1px black;
-    }
+  .background_wrapper_1, .background_parallax {
+    background-size: 100%;
+  }
+
+  .background_wrapper_2 {
+    background-size: contain;
+  }
+
+  .background_parallax {
+    height: 400px;
+  }
+
 
 } /* min-width 641px, medium screens */
 
@@ -182,3 +265,8 @@
 @media only screen and (min-width: 1024px) and (max-width: 90em) { 
   
 } /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
+
+
+a {
+  text-decoration: underline;
+}

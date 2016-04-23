@@ -1,28 +1,31 @@
-<h3>Group Message:</h3>
+<h4><%= @marquee.html_safe %><h4>
 
-<h4><%= @event_info %><h4>
+<h3><%= link_to("See Who's Going!", event_users_path(@event.id), method: :get) %></h3>
+
+<h3>Group Message:</h3>
 
 <%= form_for :group_message, remote: true do |ngm| %>
   <%= ngm.hidden_field :event_id, value: @event.id %>
   <%= ngm.hidden_field :user_id, value: @user.id %>
-  <%= ngm.text_area :body, rows: 5, label: false %>
-  <%= ngm.submit :create, value: "Post", class: "radius secondary button"  %>
+  <%= ngm.text_area :body, rows: 3, label: false %>
+  <%= ngm.submit :create, value: "Post", class: "radius button"  %>
 <% end %>
 
-<div class="all_group_messages">
+<div class="all_messages">
   <% if @group_messages.present? %>  
     <% @group_messages.reverse_each do |gm| %>
       <% if gm.user.id == @user.id %>
-        <div class="single_group_message mine row">
+        <div class="single_message mine row">
       <% else %>
-        <div class="single_group_message row">
+        <div class="single_message row">
       <% end %>
-          <div class="gm_body small-8 column"><%= gm.body %></div>
-          <div class="gm_info small-4 column">
+          <div class="msg_body small-8 column"><%= gm.body %></div>
+
+          <div class="msg_info small-4 column">
             <strong><em>
               <div>
                 <% if gm.user.id == @user.id %>
-                  Mw
+                  Yours Truly
                 <% else %>
                   <%= gm.user.name %>
                 <% end %>
@@ -31,6 +34,7 @@
               <div><%= gm.created_at.strftime("%-I:%M:%S %P") %></div>
             </em></strong>
           </div>
+
         </div>
     <% end %>
   <% else %>

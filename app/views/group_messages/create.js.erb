@@ -1,7 +1,7 @@
-$(".all_group_messages").prepend("<hr><div class='single_group_message'><div class='gm_body'><%= @group_message.body %></div><div class='gm_info'><strong><em><%= @group_message.user.name %></em></strong></div><div class='gm_info'><strong><em><%= @group_message.created_at.strftime('%-m/%-d/%y') %></em></strong></div><div class='gm_info'><strong><em><%= @group_message.created_at.strftime('%-I:%M:%S %p %Z') %></em></strong></div></div><hr>")
+$(".all_messages").prepend("<%= j render(partial: 'new_gm') %>")
 
 
-$(".new_group_message").on("ajax:complete", function(e){
+$("form").on("ajax:complete", function(e){
   $("#group_message_body").val('')
 })
 

@@ -5,8 +5,13 @@ class UserEventsController < ApplicationController
 
   require "search"
 
+  def my_events
+    @user_events = UserEvent.where(user_id: @user_id)
+  end
+
+  # my_events page
   def index
-    @user_events = UserEvent.where(user_id: @user.id)
+    @user_events = UserEvent.where(user_id: @user.id, attending: true )
     # don't know if i will actually use this
     @jb_event_ids = []
     @user_events.each do |ue|
@@ -18,11 +23,12 @@ class UserEventsController < ApplicationController
       @jb_events << ::Search.new.get_event_by_id(j)
     end
 
-
   end
 
   def show
-    @user_event = UserEvent.find_or_create_by(event_id: @event.id, user_id: @user.id)
+    @user_event = UserEvent.find_by(event_id: @event.id, user_id: @user.id)
+
+    # @user_event.update(attending: true)
 
     @all_users = UserEvent.where(event_id: @event.id)
 
@@ -46,7 +52,7 @@ class UserEventsController < ApplicationController
 
     @group_message = GroupMessage.where(event_id: @event.id, user_id: @user.id)
 
-    @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
+    @user_event.attending == true ? @user_going = true : @user_going = false
 
   end
 
@@ -76,29 +82,30 @@ class UserEventsController < ApplicationController
   end
 
   def destroy
-    @user_event = Event.find_by(jb_event_id: @event.jb_event_id, user_id: @user.id)
+    @user_event = UserEvent.find(params[:id])
 
     @user_event.destroy
 
-    if @user_event.destroy
-      # flash[:message] = "You are no longer attending this event!"
-      
-      # respond_to do |format|
-      #   format.js
-      # end    
+    redirect_to root_path
+  end
 
-      redirect_to event_path(@event.id)
-      
-    else
-      flash[:message] = "There was a problem..."
-      redirect_to event_path(@event.id)
-    end
+  def attend
+    @user_event = UserEvent.find(params[:id])
+    @user_event.update(attending: true)
+    redirect_to user_event_path(@user_event.id)
+
+  end
+
+  def unattend
+    @user_event = UserEvent.find(params[:id])
+    @user_event.update(attending: false)
+    redirect_to event_path(@user_event.event.jb_event_id)
   end
 
   private
 
   def event_params
-    parms.require(:event).permit(:user_id, :event_id)
+    parms.require(:event).permit(:user_id, :event_id, :attending)
   end
 
   def set_user
@@ -106,7 +113,7 @@ class UserEventsController < ApplicationController
   end
 
   def set_event
-    @event = Event.find(params[:id])
+    @event = UserEvent.find(params[:id]).event
   end
 
 end

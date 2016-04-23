@@ -1,12 +1,15 @@
 <div class="row">
-  <div class="marquee_title small-1 column">See:<br>At:<br>On:</div>
   <div class="marquee_content small-7 column">
     <%= @marquee.html_safe %>
   </div>
   <div class="small-3 column attend_button_container">
+    <!--  -->
     <% if @user_going %>
-      <%= link_to("You're Going to this Event", user_event_path(@event.id), method: :get, class: "large button attend") %>
+      <%= link_to("You're Going", user_event_path(@user_event.id), method: :get, class: "button attend") %>
+    <% else %>
+      <%= link_to("I want to go!", attend_path(@user_event.id), method: :post, class: "button attend") %>
     <% end %>
+    <!-- End comments -->
   </div>
 </div>
 
@@ -35,5 +38,3 @@
 <div><%= link_to("Buy Tickets!", @event_url, method: :get) %></div>
 
 <hr>
-
-LINK TO GROUP MESSAGE???

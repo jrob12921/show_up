@@ -5,6 +5,15 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
-namespace :events do
+namespace :db do
+
+  desc "Wipes all tables"
+  task :wipe do
+    User.destroy_all
+    Event.destroy_all
+    UserEvent.destroy_all
+    GroupMessage.destroy_all
+    DirectMessage.destroy_all
+  end
 
 end

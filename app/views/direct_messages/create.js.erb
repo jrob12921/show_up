@@ -1,0 +1,6 @@
+$(".all_messages").prepend("<%= j render(partial: 'new_dm') %>")
+
+
+$("form").on("ajax:complete", function(e){
+  $("#direct_message_body").val('')
+})
