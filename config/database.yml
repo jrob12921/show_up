@@ -1,6 +1,7 @@
 default: &default
   adapter: postgresql
-  user: showup
+  database: showup
+  user: postgres
   password: 
   pool: 5
   timeout: 5000
