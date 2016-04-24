@@ -211,9 +211,17 @@
       margin-bottom: 1px;
   }
 
-  .event_container {
+  .event_bg_container {
     background-image: url("/assets/yellow_light_bg");
     background-size: 100%;
+  }
+
+  .event_info {
+  
+  }
+
+  .my_events_container {
+    border: 1px solid black;
   }
 
 
