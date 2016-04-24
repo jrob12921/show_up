@@ -1,26 +1,52 @@
 <h2>My Events</h2>
 
-<% if @jb_events[0][:jb_event_id] != 0 %>
-  <ol>
+<% if @jb_events.blank? || @jb_events[0][:jb_event_id] != 0 %>
+
     <% @jb_events.each_with_index do |j, i| %>
-      <li>
-        <ul>   
-            <li><%= link_to("Event Page", event_path(j[:jb_event_id]), method: :get) %></li>
-            <li>Artists:
+      
+        <div class="row_container">
+          <div class="row">  
+            <div class="small-12 columns">
+              <%= link_to("Event Page", event_path(j[:jb_event_id]), method: :get, class: "large button custom expanded") %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="small-4 columns">
+              <span>Artists:<span>
               <ol>
                 <% j[:event_artists].each do |a| %>
                   <li><%= a['Name'] %></li>
                 <% end %>
               </ol>
-            </li>
-            <li>Venue: <%= j[:event_venue]['Name'] %></li>
-            <li>Date: <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %></li>
-            <li><%= link_to("See the Group Chat!!", event_group_messages_path(@user_events[i].event_id), method: :get) %></li>
-        </ul>
-      </li>
+            </div>
+          
+
+            <div class="small-4 columns">
+              <span>Venue:</span> <%= j[:event_venue]['Name'] %>
+            </div>
+
+            <div class="small-4 columns">
+                <span>Date:</span> <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="small-6 columns">
+              <%= link_to("See the Group Chat!!", event_group_messages_path(@user_events[i].event_id), method: :get, class: "large button custom") %>
+            </div>
+
+            <div class="small-6 columns">
+              <%= link_to("Find Out Who's Going", event_users_path(user_events[i].event_id), method: :post, class: "large button custom") %>
+            </div>
+          </div>
+        </div>
+
       <br>
     <% end %>
-  </ol>
+
 <% else %>
+
   <div>You're not going to any shows.  Time to <%= link_to("change", root_path, method: :get) %> that...</div>
+
 <% end %>

@@ -1,14 +1,20 @@
 default: &default
   adapter: postgresql
-  database: showup
-  user: postgres
-  password: 
+  database: showup_production
+  # user: postgres
+  # password: 
   pool: 5
   timeout: 5000
 
 development:
-  <<: *default
-  database: showup
+  adapter: postgresql
+  database: showup_development
+  username: postgres
+  password: 
+  host: localhost
+  encoding: UTF8
+  pool: 5
+  timeout: 5000
 
 test:
   <<: *default

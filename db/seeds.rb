@@ -9,13 +9,18 @@
 
 # As of the creation of this seed file, there are 3 users in the system , with IDs of 3, 4, and 5
 
+GroupMessage.destroy_all
+DirectMessage.destroy_all
+UserEvent.destroy_all
+Event.destroy_all
+
+
 
 events = [
   2724085, # 6/25 Dead & Co @ Citi Field
   2724086 # 6/26 Dead & Co @ Citi Field
 ]
 
-# Event.destroy_all
 
 events.each do |a|
   Event.create(jb_event_id: a)
@@ -35,7 +40,6 @@ user_events = [
   [3, y]
 ]
 
-UserEvent.destroy_all
 
 user_events.each do |a, b|
   UserEvent.create(user_id: a, event_id: b, attending: true)
@@ -51,7 +55,6 @@ group_messages = [
 
 ]
 
-GroupMessage.destroy_all
 
 group_messages.each do |a, b, c|
   GroupMessage.create(event_id: a, user_id: b, body: c)
@@ -74,8 +77,6 @@ direct_messages = [
   [y, 2, 1, "Jordannnnnnnn"]
 
 ]
-
-DirectMessage.destroy_all
 
 direct_messages.each do |a, b, c, d|
   DirectMessage.create(event_id: a, sender_id: b, recipient_id: c, body: d)
