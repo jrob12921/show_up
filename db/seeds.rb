@@ -15,7 +15,7 @@ events = [
   2724086 # 6/26 Dead & Co @ Citi Field
 ]
 
-Event.destroy_all
+# Event.destroy_all
 
 events.each do |a|
   Event.create(jb_event_id: a)
