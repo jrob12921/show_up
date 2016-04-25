@@ -6,9 +6,9 @@
       <div class="row">
         <div class="small-12 colummns button reverse2">  
           <% if i[:artist_names].length > 1 %>
-            <%= link_to("<%= i[:artist_names].join(", ") %><span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y') %>", event_group_messages_path(@user_events[idx].event_id), method: :get) %>
+            <%= link_to("<%= i[:artist_names].join(", ") %><span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y') %>".html_safe, event_group_messages_path(@user_events[idx].event_id), method: :get) %>
           <% else %>
-            <%= link_to("<%= i[:artist_names][0] %><span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y') %>",event_group_messages_path(@user_events[idx].event_id) , method: :get) %>
+            <%= link_to("<%= i[:artist_names][0] %><span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y') %>".html_safe,event_group_messages_path(@user_events[idx].event_id) , method: :get) %>
           <% end %>
          
          <br>
