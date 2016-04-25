@@ -9,11 +9,6 @@
           <% else %>
             <%= link_to("#{i[:artist_names][0]} @ #{i[:event_venue]['Name']} on #{DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y')}<br>(Group Chat)".html_safe,event_group_messages_path(@user_events[idx].event_id) , method: :get) %>
           <% end %>
-         
-         <br>
-
-         (Group Chat)
-
         </div>
       </div>
 
@@ -27,12 +22,8 @@
         </div>
       <% end %>
 
-
     <% end %>
-
   <% end %>
-
-
 <% else %>
   <div class="row">
     <div class="small-12 colummns">  

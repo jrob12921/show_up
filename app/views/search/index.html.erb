@@ -2,7 +2,7 @@
   <div class="small-12 columns expanded button custom2">
     <h2>
       <% if current_user.sign_in_count > 1 %>
-        Welcome back, <%= current_user.name.split(" ").first %>!
+        Welcome Back, <%= current_user.name.split(" ").first %>!
       <% else %>
         Welcome, <%= current_user.name.split(" ").first %>!
       <% end %>
@@ -28,7 +28,7 @@
     
     <%= text_field_tag(:q_zip_code) %><br>
 
-    <%= submit_tag("Search Events and Venues by Zip Code:", class: "button reverse expanded") %>
+    <%= submit_tag("Search Events and Venues by ZIP", class: "button reverse expanded") %>
   <% end %>
   <br>
   <br>
