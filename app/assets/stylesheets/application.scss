@@ -134,12 +134,6 @@
     background: linear-gradient(to right, $magenta, $orange);
   }
 
-  a {
-    &:link, &:visited {
-      color: black;
-    }
-  }
-
   a.button {
     &:link, &:visited {
       color: white;
@@ -279,6 +273,6 @@ a {
   text-decoration: underline;
 }
 
-.button {
+.button, .button a {
   text-decoration: none;
 }
