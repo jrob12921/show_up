@@ -28,12 +28,10 @@ class UserEventsController < ApplicationController
     if @jb_events.present?
       @jb_events.each do |a|
         artists = []
-        if a[:event_artists].present?
-          a[:event_artists].each do |n|
-            artists << n['Name']
-          end
-          @artist_names << artists
+        a[:event_artists].each do |n|
+          artists << n['Name']
         end
+        @artist_names << artists
       end
     end
 
