@@ -24,10 +24,11 @@ class DirectMessagesController < ApplicationController
       # @artist_ids << a['Id']
     end
 
-    @marquee = "<strong>#{@artist_names.join(", ")}</strong><br><strong>#{@event_venue['Name']}</strong><br><strong>#{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}</strong>"
+    @marquee = "<strong>#{@artist_names.join(", ")} @ #{@event_venue['Name']} on #{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}"
 
 
     @other_user = User.find(params[:recipient_id])
+    @page_header = "<%= image_tag @other_user.image %> <%= @other_user.name.split(' ').first"
     @sent_messages = DirectMessage.where(event_id: @event.id, sender_id: @user.id, recipient_id: @other_user.id)
     @received_messages = DirectMessage.where(event_id: @event.id, sender_id: @other_user.id, recipient_id: @user.id)
     @aggregate_messages = []

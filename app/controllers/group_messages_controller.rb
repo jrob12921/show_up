@@ -5,6 +5,7 @@ class GroupMessagesController < ApplicationController
   before_action :set_user, only: [:index]
 
   def index
+    @page_header = "Group Chat"
     # Don't know if I will need
     @event = Event.find(params[:event_id])
     @event_info = ::Search.new.get_event_by_id(@event.jb_event_id)
@@ -23,7 +24,7 @@ class GroupMessagesController < ApplicationController
       # @artist_ids << a['Id']
     end
 
-    @marquee = "<strong>#{@artist_names.join(", ")}</strong><br><strong>#{@event_venue['Name']}</strong><br><strong>#{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}</strong>"
+    @marquee = "#{@artist_names.join(", ")} @ #{@event_venue['Name']} on #{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}"
 
     @group_messages = GroupMessage.where(event_id: @event.id, user_id: @user.id)
 

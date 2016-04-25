@@ -1,20 +1,27 @@
-<h4><%= @marquee.html_safe %><h4>
+<div class="row">
+  <div class="small-12 columns">
+    <h2><%= @marquee.html_safe %></h2>
+  </div>
+</div>
 
-<h3>Message <%= @other_user.name %>:</h3>
+<div class="row">
+  <div class="small-12 columns">
+    <h3>Message <%= @other_user.name %>:</h3>
+  </div>
+</div>
 
 <%= form_for :direct_message, remote: true do |ndm| %>
   <%= ndm.hidden_field :event_id, value: @event.id %>
   <%= ndm.hidden_field :sender_id, value: @user.id %>
   <%= ndm.hidden_field :recipient_id, value: @other_user.id %>
   <%= ndm.text_area :body, rows: 3, label: false %>
-  <%= ndm.submit :create, value: "Post", class: "radius button"  %>
+  <%= ndm.submit :create, value: "Holler", class: "radius button custom"  %>
 <% end %>
 
 <div class="all_messages">
   <% if @aggregate_messages.present? %>  
     <% @aggregate_messages.reverse_each do |dm| %>
       <% if dm.sender_id == @user.id %>
-      <!-- xxxxxxxxxxxxxx -->
         <div class="single_message mine row">
           <div class="msg_body small-7 column"><%= dm.body %></div>
           <div class="msg_info small-3 column">
@@ -43,6 +50,12 @@
       <% end %>
     <% end %>
   <% else %>
-    <div>There are no messages yet. Post something!</div>
+
+    <div class="single_message mine row">
+      <div class="small-12 column">
+        There are no messages yet. Post something!
+      </div>
+    </div>
+    
   <% end %>
 </div>
