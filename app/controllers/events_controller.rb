@@ -39,6 +39,8 @@ class EventsController < ApplicationController
 
      @user_event.attending == true ? @user_going = true : @user_going = false
 
+     @url = "https://www.google.com/maps/place/#{@event_venue['Address']}, #{@event_venue['City']}, #{@event_venue['StateCode']} #{@event_venue['ZipCode']}".gsub!(' ', '+').gsub!('++','+')
+
     # Ask orlando about this. 
     # There might be a way to use "build" so that the link can exist without creating the record
   end
