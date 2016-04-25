@@ -226,17 +226,21 @@
     margin-bottom: 1px;
   }
 
+  .custom2 {
+    background: linear-gradient(to right, $light_green, $turkuaz);
+  }
+
   .event_bg_container {
     background-image: url("/assets/yellow_light_bg");
     background-size: 100%;
   }
 
   .event_info {
-    padding-bottom: 4px;
+    border-bottom: 1px solid black;
   }
 
   .my_events_container {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
   }
 
 

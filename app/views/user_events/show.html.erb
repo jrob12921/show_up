@@ -1,30 +1,24 @@
-<div class="event_bg_container">
-  <div class="row">
-    <div class="small-12 columns">
-      <h2>Congrats!  You're seeing:</h2>
-    </div>
+<div class="row">
+  <div class="small-12 columns">
+    <h2>Congrats!  You're seeing:</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns large button expanded custom2">
+    <%= @artist_names.join(", ") %> @ <%= @event_venue['Name'] %> on <%= DateTime.parse(@event_date).strftime('%-m/%-d/%y') %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-8 columns">
+    <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
   </div>
 
-  <div class="row">
-    <div class="small-12 columns">
-      <%= @artist_names.join(", ") %>
-      <span> @ </span>
-      <%= @event_venue['Name'] %>
-      <span> on </span>
-      <%= DateTime.parse(@event_date).strftime("%-m/%-d/%y") %>
-
-    </div>
+  <div class="small-4 columns">
+    <%= link_to(image_tag("/assets/maps_icon.png"), "http://maps.google.com/?q=<%= @event_venue['Address'] %>,<%= @event_venue['City'] %>,<%= @event_venue['StateCode'] %>,<%= @event_venue['ZipCode']", method: :get, class: "large button custom expanded") %>
   </div>
-
-  <div class="row">
-    <div class="small-8 columns">
-      <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
-    </div>
-
-    <div class="small-4 columns">
-      <%= link_to("Google Maps", "http://maps.google.com/?q=@event_venue['Address'] %>,<%= @event_venue['City'] %>,<%= @event_venue['StateCode'] %>,<%= @event_venue['ZipCode']") %>
-    </div>
-  </div>
+</div>
 
 <!-- Buttons start here -->
 
