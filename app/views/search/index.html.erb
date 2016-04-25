@@ -3,9 +3,9 @@
   <div class="row">
     <h2 class="heading">
       <% if current_user.sign_in_count > 1 %>
-        Welcome back, %= current_user.name.split(" ").first %>!
+        Welcome back, <%= current_user.name.split(" ").first %>!
       <% else %>
-        Welcome, %= current_user.name.split(" ").first %>!
+        Welcome, <%= current_user.name.split(" ").first %>!
       <% end %>
     </h2>
   </div>
@@ -21,7 +21,7 @@
       <%= label_tag(:q_name, "Search Artists and Venues by Name:") %>
       <%= text_field_tag(:q_name) %>
 
-      <%= submit_tag("Search by Name", class: "button") %>
+      <%= submit_tag("Search by Name", class: "custom button") %>
     <% end %>
 
   </div>
@@ -33,7 +33,7 @@
       <%= label_tag(:q_zip_code, "Search Events and Venues by Zip Code:") %>
       <%= text_field_tag(:q_zip_code) %>
 
-      <%= submit_tag("Search by Zip Code", class: "button") %>
+      <%= submit_tag("Search by Zip Code", class: "custom button") %>
     <% end %>
 
   </div>

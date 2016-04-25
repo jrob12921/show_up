@@ -1,7 +1,18 @@
 <h2 class="marquee"><%= @marquee.html_safe %></h2>
 
-<ul>
+<% if %>
   <% @event_users.each do |u| %>
-    <li><%= image_tag u.image, class: "users_image" %> <span class="users_name"><%= u.name %> <%= link_to("Send #{u.name.split(' ').first} a Message!", event_dm_path(@event.id, current_user.id, u.id), method: :get, class: "button") if current_user.id != u.id %></span></li>
+    <div class="row">
+      <div class="small-12 columns custom2">
+        <%= image_tag u.image, class: "users_image" %> <span class="users_name"><%= u.name %> <%= link_to("Send #{u.name.split(' ').first} a Message!", event_dm_path(@event.id, current_user.id, u.id), method: :get, class: "button custom") if current_user.id != u.id %></span>
+      </div>
+    </div>
   <% end %>
-</ul>
+
+<% else %>
+  <div class="row">
+    <div class="small-12 columns">
+      You arn't supposed to be here...
+    </div>
+  </div>
+<% end %>

@@ -1,21 +1,35 @@
 <h3>Upcoming Events:</h3>
-<ol>
-  <% @artist_events.each do |e| %>
-    <li>
-      <ul>
-        <li><%= link_to("View This Event", event_path(e[:jb_event_id]), method: :get) %></li>
-        <li>Date: <%= DateTime.parse(e[:event_date]).strftime("%-m/%-d/%y") %></li>
-        <!-- Possible to put in link to venue events?  Does search give me ID? -->
-        <li>Venue: <%= link_to(e[:event_venue]['Name'], venue_events_path(e[:event_venue]['Id']), method: :get)  %> </li>
-        <li>Artists:
-          <ol>
-            <% e[:event_artists].each do |a| %>
-              <li><%= link_to(a['Name'], artist_events_path(a['Id']), methood: :get) %></li>
-            <% end %>
-          </ol>
-        </li>
-        <li><%= link_to("Buy Tickets", "#{e[:event_url]}") %></li>
-      </ul>
-    </li>
+
+<% @artist_events.each_with_index do |e, i| %>
+  
+  <div class="row">
+    <div class="small-12 columns">
+      <%= link_to("<%= @artist_names %> @ <%= e[:event_venue]['Name'] %> on <%= DateTime.parse(e[:event_date]).strftime('%-m/%-d/%y') %>", event_path(e[:jb_event_id]), method: :get, class: "large button expanded custom2") %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns">    
+      <%= link_to("Buy Tickets", "#{e[:event_url]}", method: :get, class: "large button expanded custom") %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns">  
+      <%= link_to("See Upcoming Events from <%= e[:event_venue]['Name'] %>", venue_events_path(e[:event_venue]['Id']), method: :get, class: "large button expanded custom")  %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 columns custom button expanded">
+      Find Shows by Artist:
+    </div>
+  </div>
+
+  <% e[:event_artists].each do |a| %>
+    <div class="row">
+      <div class="small-12 columns"> 
+        <%= link_to("Shows for <%= a['Name'] %>", artist_events_path(a['Id']), methood: :get, class: "button large reverse expanded") %>
+      </div>
+    </div>
   <% end %>
-</ol>

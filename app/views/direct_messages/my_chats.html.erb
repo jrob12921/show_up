@@ -24,11 +24,12 @@
       <% i[:chat_partners].each do |cp| %>
         <div class="row">
           <div class="small-12 colums">
-            <%= link_to(cp[:partner_name], event_dm_path(i[:event_id], current_user.id, cp[:partner_id]), method: :get, class: "large button expanded reverse") %>
+            <%= link_to("<%= image_tag cp[:partner_picture] %> <%= cp[:partner_name] %>", event_dm_path(i[:event_id], current_user.id, cp[:partner_id]), method: :get, class: "large button expanded reverse") %>
           </div>
         </div>
       <% end %>
 
+      <hr>
 
     <% else %>
       <div class="row">
@@ -37,5 +38,6 @@
         </div>
       </div>
     <% end %>
+
         
   <% end %>

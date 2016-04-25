@@ -78,11 +78,11 @@ class DirectMessagesController < ApplicationController
       @partners = []
 
       @sent.each do |s|
-        @partners << {partner_id: s.recipient_id, partner_name: User.find(s.recipient_id).name}
+        @partners << {partner_id: s.recipient_id, partner_name: User.find(s.recipient_id).name, partner_image: User.find(s.recipient_id).image}
       end
 
       @received.each do |r|
-        @partners << {partner_id: r.sender_id, partner_name: User.find(r.sender_id).name}
+        @partners << {partner_id: r.sender_id, partner_name: User.find(r.sender_id).name, partner_image: User.find(r.sender_id).image}
       end
 
       i[:chat_partners] = @partners.uniq

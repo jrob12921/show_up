@@ -136,8 +136,6 @@
     font-size: 10px;
   }
 
-
-
   body {
     height: 100%;
     margin: 0;
@@ -149,7 +147,7 @@
   }
 
   #main_nav {
-    background-color: $magenta;
+    background: linear-gradient(to right, $magenta, $orange);
   }
 
   a {
@@ -237,16 +235,8 @@
     background-size: 100%;
   }
 
-  .event_info {
-    border-bottom: 1px solid black;
-  }
-
-  .my_events_container {
-    border-bottom: 1px solid black;
-
-    a, a:link, a:visited, a:hover {
-      text-decoration: none
-    }
+  .congrats {
+    color: $dark_blue;
   }
 
 
@@ -305,7 +295,10 @@
   
 } /* min-width 1025px and max-width 1440px, use when QAing large screen-only issues */
 
-
 a {
   text-decoration: underline;
+}
+
+.button {
+  text-decoration: none;
 }

@@ -4,26 +4,26 @@
 
     <% @jb_events.each_with_index do |j, i| %>
       
-        <div class="my_events_container">
-
-          <a href="<%= event_path(j[:jb_event_id]) %>" class="large button custom expanded">
-            <div class="row event_info">
-              <div class="small-12 columns">
-                <%= @artist_names[i].join(", ") %> @ <%= j[:event_venue]['Name'] %> @ <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %>
-              </div>
-            </div>
-          </a>
-
-          <div class="row">
-            <div class="small-6 columns">
-              <%= link_to("See the Group Chat!!", event_group_messages_path(@user_events[i].event_id), method: :get, class: "button reverse") %>
-            </div>
-
-            <div class="small-6 columns">
-              <%= link_to("Find Out Who's Going", event_users_path(@user_events[i].event_id), method: :get, class: "button reverse ") %>
-            </div>
+      <a href="<%= event_path(j[:jb_event_id]) %>" class="large button custom expanded">
+        <div class="row event_info">
+          <div class="small-12 columns">
+            <%= @artist_names[i].join(", ") %> @ <%= j[:event_venue]['Name'] %> @ <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %>
           </div>
-        </div>  
+        </div>
+      </a>
+
+      <div class="row">
+        <div class="small-6 columns">
+          <%= link_to("See the Group Chat", event_group_messages_path(@user_events[i].event_id), method: :get, class: "button reverse") %>
+        </div>
+
+        <div class="small-6 columns">
+          <%= link_to("See Who's Going", event_users_path(@user_events[i].event_id), method: :get, class: "button reverse ") %>
+        </div>
+      </div>
+
+      <br>
+        
     <% end %>
 
 <% else %>

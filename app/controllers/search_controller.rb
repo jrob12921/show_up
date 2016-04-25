@@ -56,9 +56,19 @@ class SearchController < ApplicationController
     # end
     @artist_name = ::Search.new.get_artist_name_by_id(@artist_id)
 
+    @artist_names = []
 
     @page_header = @artist_name
-    if !@artist_events.present?
+    if @artist_events.present?
+      @artist_events.each do |a|
+        artists = []
+        a[:event_artists].each do |n|
+          artists << n['Name']
+        end
+        @artist_names << artists
+      end
+
+    else
       @message = "No Upcoming Events for this Artist"
     end
 
@@ -70,10 +80,21 @@ class SearchController < ApplicationController
     #   ::Search.new.get_venue_events_by_id(@venue_id)
     # end
     @venue_events = ::Search.new.get_venue_events_by_id(@venue_id)
+    @artist_names = []
+    
     if @venue_events.present?
       # To avoid another API call
       @venue_name = @venue_events.first[:event_venue]['Name']
       @page_header = @venue_name
+
+      @venue_events.each do |a|
+        artists = []
+        a[:event_artists].each do |n|
+          artists << n['Name']
+        end
+        @artist_names << artists
+      end
+
     else
       @message = "No Upcoming Events at this Venue!"
       # @page_header = Rails.cache.fetch(:page_header, expires_in: 24.hours) do
@@ -81,6 +102,8 @@ class SearchController < ApplicationController
       # end
       @page_header = ::Search.new.get_venue_name_by_id(@venue_id)
     end
+
+
   end
 
   def local_events
