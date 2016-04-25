@@ -139,6 +139,12 @@
     background: linear-gradient(to right, $magenta, $orange);
     position: fixed;
     z-index: 1;
+    width: 100%;
+  }
+
+  .spacer {
+    height: 66px;
+    width: 100%;
   }
 
   a.button {
