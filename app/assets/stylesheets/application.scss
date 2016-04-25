@@ -33,6 +33,10 @@
     padding: 0;
   }
 
+  .button {
+    border: none;
+  }
+
   @font-face {
     font-family: 'MARQUEE';
     src: font-url('MARQUEE.TTF') format('truetype');
@@ -276,4 +280,9 @@ a {
 
 .button, .button a {
   text-decoration: none;
+}
+
+.main_nav {
+  position: fixed;
+  z-index: 1;
 }
