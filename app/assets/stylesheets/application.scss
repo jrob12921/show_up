@@ -137,6 +137,8 @@
 
   #main_nav {
     background: linear-gradient(to right, $magenta, $orange);
+    position: fixed;
+    z-index: 1;
   }
 
   a.button {
@@ -280,9 +282,4 @@ a {
 
 .button, .button a {
   text-decoration: none;
-}
-
-.main_nav {
-  position: fixed;
-  z-index: 1;
 }
