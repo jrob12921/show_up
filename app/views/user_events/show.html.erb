@@ -10,13 +10,13 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row large button custom expanded">
   <div class="small-8 columns">
     <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
   </div>
 
   <div class="small-4 columns">
-    <%= link_to(image_tag("/assets/maps_icon.png"), "http://maps.google.com/?q=<%= @event_venue['Address'] %>,<%= @event_venue['City'] %>,<%= @event_venue['StateCode'] %>,<%= @event_venue['ZipCode']", method: :get, class: "large button custom expanded") %>
+    <%= link_to(image_tag("/assets/maps_icon.png"), "http://maps.google.com/?q=<%= @event_venue['Address'] %>,<%= @event_venue['City'] %>,<%= @event_venue['StateCode'] %>,<%= @event_venue['ZipCode']", method: :get) %>
   </div>
 </div>
 

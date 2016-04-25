@@ -26,8 +26,8 @@ class UserEventsController < ApplicationController
     @artist_names = []
     @jb_events.each do |a|
       artists = []
-      a['Artists'].each do |n|
-        artists['Name']
+      a[:event_artists].each do |n|
+        artists << n['Name']
       end
       @artist_names << artists
     end
