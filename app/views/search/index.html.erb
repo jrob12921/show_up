@@ -12,35 +12,35 @@
 
 <div class="search_form background_wrapper_1">
   <%= form_tag("/results", method: "get") do %>
+    <%= text_field_tag(:q_name) %>
 
-    <%= label_tag(:q_name, "Search Artists and Venues by Name:", class: "button reverse expanded") %>
-    <%= text_field_tag(:q_name) %><br>
-
-    <%= submit_tag("Search by Name", class: "custom button") %>
+    <%= submit_tag("Search Artists and Venues by NAME", class: "button reverse expanded") %>
   <% end %>
+  <br>
+  <br>
+  <br>
 </div>
-<br>
-<br>
+
 <!-- <div class="background_parallax"></div> -->
 
 <div class="search_form background_wrapper_2">
   <%= form_tag("/results", method: "get") do %>
     
-    <%= label_tag(:q_zip_code, "Search Events and Venues by Zip Code:", class: "button reverse expanded") %>
     <%= text_field_tag(:q_zip_code) %><br>
 
-    <%= submit_tag("Search by Zip Code", class: "custom button") %>
+    <%= submit_tag("Search Events and Venues by Zip Code:", class: "button reverse expanded") %>
   <% end %>
+  <br>
+  <br>
+  <br>
 </div>
-<br>
-<br>
 
 <!-- <div class="background_parallax_2"></div> -->
 
 <div class="background_wrapper_3">
 
-  <div class="app_info row">
-    <div class="small-12 column">
+  <div class="row">
+    <div class="small-12 column app_info">
       <h2>Learn More</h2>
     </div>
 
