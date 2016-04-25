@@ -4,7 +4,7 @@
   
   <div class="row">
     <div class="small-12 columns">
-      <%= link_to("<%= @artist_names %> @ <%= e[:event_venue]['Name'] %> on <%= DateTime.parse(e[:event_date]).strftime('%-m/%-d/%y') %>", event_path(e[:jb_event_id]), method: :get, class: "large button expanded custom2") %>
+      <%= link_to("#{@artist_names} @ #{e[:event_venue]['Name']} on #{DateTime.parse(e[:event_date]).strftime('%-m/%-d/%y')}", event_path(e[:jb_event_id]), method: :get, class: "large button expanded custom2") %>
     </div>
   </div>
 
@@ -16,7 +16,7 @@
 
   <div class="row">
     <div class="small-12 columns">  
-      <%= link_to("See Upcoming Events from <%= e[:event_venue]['Name'] %>", venue_events_path(e[:event_venue]['Id']), method: :get, class: "large button expanded custom")  %>
+      <%= link_to("See Upcoming Events from #{e[:event_venue]['Name']}", venue_events_path(e[:event_venue]['Id']), method: :get, class: "large button expanded custom")  %>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
   <% e[:event_artists].each do |a| %>
     <div class="row">
       <div class="small-12 columns"> 
-        <%= link_to("Shows for <%= a['Name'] %>", artist_events_path(a['Id']), methood: :get, class: "button large reverse expanded") %>
+        <%= link_to("Shows for #{a['Name']}", artist_events_path(a['Id']), methood: :get, class: "button large reverse expanded") %>
       </div>
     </div>
   <% end %>
