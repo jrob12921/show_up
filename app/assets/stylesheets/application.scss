@@ -96,12 +96,12 @@
   }
 
   .single_message {
-    margin-bottom: 5px;
     height: 100%;
   }
 
   .mine {
     background: linear-gradient(to right, $light_green, $turkuaz);
+    text-align: right;
 
     .img_cont {
       padding-right: 0;
@@ -152,7 +152,7 @@
     background-size: cover;
   }
 
-  .background_wrapper_2 {
+  .background_wrapper_3 {
     background-image: url("/assets/heart_bg.jpg");
     background-size: cover;
 
@@ -167,7 +167,7 @@
     }
   }
 
-  .background_parallax {
+  .background_wrapper_2 {
     background-image: url("/assets/concert_bg_1.jpg");
     background-size: cover;
     height: 100px;
@@ -227,6 +227,11 @@
     color: $dark_blue;
   }
 
+  .event {
+    font-size: 2rem;
+  }
+
+
 
 // Small screens
 @media only screen { 
@@ -243,9 +248,10 @@
     height: 60px;
   }
 
-  // li > a {
-  //     text-shadow: 2px 2px 3px black;
-  //   }
+  .address {
+    font-size: 1rem;
+  }
+
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
 // Medium screens
@@ -255,16 +261,8 @@
     font-size: 54px;
   }
 
-  .background_wrapper_1, .background_parallax {
+  .background_wrapper_1, .background_wrapper_2 {
     background-size: 100%;
-  }
-
-  .background_wrapper_2 {
-    background-size: contain;
-  }
-
-  .background_parallax {
-    height: 400px;
   }
 
 

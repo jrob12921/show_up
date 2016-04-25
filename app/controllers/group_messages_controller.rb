@@ -26,7 +26,7 @@ class GroupMessagesController < ApplicationController
 
     @marquee = "#{@artist_names.join(", ")} @ #{@event_venue['Name']} on #{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}"
 
-    @group_messages = GroupMessage.where(event_id: @event.id, user_id: @user.id)
+    @group_messages = GroupMessage.where(event_id: @event.id)
 
     @user_going = UserEvent.find_by(user_id: @user.id, event_id: @event.id).present? ? true : false
   end

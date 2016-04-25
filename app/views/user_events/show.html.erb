@@ -5,14 +5,14 @@
 </div>
 
 <div class="row">
-  <div class="small-12 columns large button expanded custom2">
-    <%= @artist_names.join(", ") %> @ <%= @event_venue['Name'] %> on <%= DateTime.parse(@event_date).strftime('%-m/%-d/%y') %>
+  <div class="small-12 columns large button expanded reverse2">
+    <span class="event"><%= @artist_names.join(", ") %> @ <%= @event_venue['Name'] %> on <%= DateTime.parse(@event_date).strftime('%-m/%-d/%y') %></span>
   </div>
 </div>
 
-<div class="row large button custom expanded">
-  <div class="small-8 columns">
-    <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
+<div class="row">
+  <div class="small-8 columns large button custom expanded">
+    <span class"address"><%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></span>
   </div>
 
   <div class="small-4 columns">
