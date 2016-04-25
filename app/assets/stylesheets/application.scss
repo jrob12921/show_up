@@ -29,12 +29,18 @@
   $turkuaz: #30b4c9;
   $purple: #ad85d2;
 
+  .column, .columns {
+    padding: 0;
+  }
+
   @font-face {
     font-family: 'MARQUEE';
     src: font-url('MARQUEE.TTF') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
+
+  @import url(https://fonts.googleapis.com/css?family=Righteous);
 
   html {
     height: 100%;
@@ -47,6 +53,10 @@
 
   h1, h2, h3, h4, h5, h6, li, div, span, a, a:link, a:visited, a:hover {
     color: white;
+  }
+
+  h2 {
+    font-family: 'Righteous', cursive;
   }
 
   .top-bar-right {
@@ -207,12 +217,36 @@
   }
 
   .custom {
-      background: linear-gradient(to right, $magenta, $orange);
+    background: linear-gradient(to right, $magenta, $orange);
+    margin-bottom: 1px;
   }
 
-  .event_container {
+  .reverse {
+    background: linear-gradient(to right, $orange, $magenta);
+    margin-bottom: 1px;
+  }
+
+  .custom2 {
+    background: linear-gradient(to right, $light_green, $turkuaz);
+    margin-bottom: 1px;
+
+  }
+
+  .event_bg_container {
     background-image: url("/assets/yellow_light_bg");
     background-size: 100%;
+  }
+
+  .event_info {
+    border-bottom: 1px solid black;
+  }
+
+  .my_events_container {
+    border-bottom: 1px solid black;
+
+    a, a:link, a:visited, a:hover {
+      text-decoration: none
+    }
   }
 
 
@@ -224,6 +258,11 @@
 @media only screen and (max-width: 640px) { 
  .page_header {
     font-size: 30px;
+  }
+
+  .gmaps {
+    width: 60px;
+    height: 60px;
   }
 
   // li > a {

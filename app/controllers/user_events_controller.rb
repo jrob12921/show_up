@@ -23,6 +23,15 @@ class UserEventsController < ApplicationController
       @jb_events << ::Search.new.get_event_by_id(j)
     end
 
+    @artist_names = []
+    @jb_events.each do |a|
+      artists = []
+      a[:event_artists].each do |n|
+        artists << n['Name']
+      end
+      @artist_names << artists
+    end
+
   end
 
   def show

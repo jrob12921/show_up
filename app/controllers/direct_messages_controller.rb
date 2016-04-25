@@ -46,6 +46,7 @@ class DirectMessagesController < ApplicationController
 
   # To show all my chats
   def my_chats
+    @page_header = "My Chats"
     @items = []
 
     @user_events = UserEvent.where(user_id: @user.id)
