@@ -228,6 +228,8 @@
 
   .custom2 {
     background: linear-gradient(to right, $light_green, $turkuaz);
+    margin-bottom: 1px;
+
   }
 
   .event_bg_container {
@@ -241,6 +243,10 @@
 
   .my_events_container {
     border-bottom: 1px solid black;
+
+    a, a:link, a:visited, a:hover {
+      text-decoration: none
+    }
   }
 
 
@@ -252,6 +258,11 @@
 @media only screen and (max-width: 640px) { 
  .page_header {
     font-size: 30px;
+  }
+
+  .gmaps {
+    width: 60px;
+    height: 60px;
   }
 
   // li > a {
