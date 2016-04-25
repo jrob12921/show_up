@@ -23,8 +23,8 @@
 
       <% i[:chat_partners].each do |cp| %>
         <div class="row">
-          <div class="small-8 colums">
-            <%= link_to(cp[:partner_name], event_dm_path(i[:event_id], current_user.id, cp[:partner_id]), method: :get, class: "button reverse") %>
+          <div class="small-12 colums">
+            <%= link_to(cp[:partner_name], event_dm_path(i[:event_id], current_user.id, cp[:partner_id]), method: :get, class: "large button expanded reverse") %>
           </div>
         </div>
       <% end %>

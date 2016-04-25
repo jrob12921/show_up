@@ -2,10 +2,10 @@
   
   <div class="row">
     <h2 class="heading">
-      <% if user_signed_in? %>
-        Welcome back, <%= current_user.name.split(" ").first %>!
+      <% if current_user.sign_in_count > 1 %>
+        Welcome back, %= current_user.name.split(" ").first %>!
       <% else %>
-        Please sign in or sign up!
+        Welcome, %= current_user.name.split(" ").first %>!
       <% end %>
     </h2>
   </div>
