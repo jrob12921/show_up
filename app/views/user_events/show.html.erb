@@ -8,7 +8,7 @@
   <div class="small-12 columns large button custom expanded">
     <span class"address"><%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></span>
 
-    <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), "http://maps.google.com/?q=#{@event_venue['Address']} #{@event_venue['City']} #{@event_venue['StateCode']} #{@event_venue['ZipCode']}".gsub!(' ', '+').gsub!('++','+').html_safe, method: :get) %>
+    <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), "https://maps.google.com?q=#{@event_venue['Address']} #{@event_venue['City']} #{@event_venue['StateCode']} #{@event_venue['ZipCode']}".gsub!(' ', '+').gsub!('++','+').html_safe, method: :get) %>
   </div>
 </div>
 
