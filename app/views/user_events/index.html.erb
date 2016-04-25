@@ -5,35 +5,32 @@
     <% @jb_events.each_with_index do |j, i| %>
       
         <div class="my_events_container">
-          <div class="row">  
-            <div class="small-12 columns">
-              <%= link_to("Event Page", event_path(j[:jb_event_id]), method: :get, class: "large button custom expanded") %>
-            </div>
-          </div>
-
-          <div class="row event_info">
-            <div class="small-4 columns">
-              <% if j[:event_artists].length > 1 %>
-
-                <ul>
-                  <% j[:event_artists].each do |a| %>
-                    <li><%= a['Name'] %></li>
-                  <% end %>
-                </ul>
-
-              <% else %>
-                  <%= j[:event_artists][0]['Name'] %>
-              <% end %>
-            </div>
           
+          <div class="row event_info">
+            <a href="<%= event_path(j[:jb_event_id]) %>" class="large button custom expanded">
+              <div class="small-4 columns">
+                <% if j[:event_artists].length > 1 %>
 
-            <div class="small-4 columns">
-              <%= j[:event_venue]['Name'] %>
-            </div>
+                  <ul>
+                    <% j[:event_artists].each do |a| %>
+                      <li><%= a['Name'] %></li>
+                    <% end %>
+                  </ul>
 
-            <div class="small-4 columns">
-              <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %>
-            </div>
+                <% else %>
+                    <%= j[:event_artists][0]['Name'] %>
+                <% end %>
+              </div>
+            
+
+              <div class="small-4 columns">
+                <%= j[:event_venue]['Name'] %>
+              </div>
+
+              <div class="small-4 columns">
+                <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %>
+              </div>
+            </a>
           </div>
 
           <div class="row">
@@ -52,6 +49,10 @@
 
 <% else %>
 
-  <div>You're not going to any shows.  Time to <%= link_to("change", root_path, method: :get) %> that...</div>
+  <div class="row">
+     <div class="small-12 columns">
+        You're not going to any shows.  Time to <%= link_to("change", root_path, method: :get) %> that...
+    </div>
+  </div>
 
 <% end %>
