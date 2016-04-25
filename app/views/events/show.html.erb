@@ -50,7 +50,7 @@
   <div class="small-12 expanded button custom">
     <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
 
-    <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), "https://www.google.com/maps/place/#{@event_venue['Address']} #{@event_venue['City']} #{@https://www.google.com/maps/place/StateCode']} #{@event_venue['ZipCode']}".gsub!(' ', '+').gsub!('++','+').html_safe, method: :get) %>
+    <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), "https://www.google.com/maps/place/#{@event_venue['Address']} #{@event_venue['City']} #{@StateCode']} #{@event_venue['ZipCode']}".gsub!(' ', '+').gsub!('++','+').html_safe, method: :get) %>
   </div>
 </div>
 
