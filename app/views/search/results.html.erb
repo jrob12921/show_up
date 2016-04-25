@@ -8,7 +8,7 @@
 
   <% @artist_results.each do |a| %>
     <div class="row">
-      <div class="small-12 column expanded button custom">
+      <div class="small-12 column expanded large button custom">
         <%= link_to(a[:artist_name], artist_events_path(a[:jb_artist_id]), method: :get) %>
       </div>
     </div>
@@ -28,7 +28,7 @@
 
   <% @venue_results.each do |v| %>
     <div class="row">
-      <div class="small-12 column expanded button custom">
+      <div class="small-12 column expanded large button custom">
         <%= link_to(v[:venue_name], venue_events_path(v[:jb_venue_id]), method: :get) %>
       </div>
     </div>
@@ -47,7 +47,7 @@
 
   <% @event_results.each do |e| %>
     <div class="row">
-      <div class="small-12 column expanded button custom">
+      <div class="small-12 column expanded large button custom">
         <%= link_to("#{@artist_names} @ #{e[:event_venue]['Name']} on #{DateTime.parse(e[:event_date]).strftime('%-m/%-d%y')}", event_path(e[:jb_event_id]), method: :get) %>
       </div>
     </div>
