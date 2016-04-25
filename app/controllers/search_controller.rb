@@ -34,6 +34,15 @@ class SearchController < ApplicationController
         @venue_results = @zip_results[0]
         @event_results = @zip_results[1]
 
+        @artist_names = []
+        @event_results.each do |a|
+          artists = []
+          a[:event_artists].each do |n|
+            artists << n['Name']
+          end
+          @artist_names << artists
+        end
+
       else
         flash[:message] = "Please enter a 5-digit number if you want to search by ZIP Code!"
         redirect_to root_path

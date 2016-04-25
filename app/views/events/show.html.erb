@@ -1,15 +1,16 @@
 <div class="row">
-  <div class="marquee_content small-7 column">
-    <%= @marquee.html_safe %>
+  <div class="small-12 column expanded button custom2">
+    <h2><%= @marquee.html_safe %></h2>
   </div>
-  <div class="small-3 column attend_button_container">
-    <!--  -->
+</div>
+
+<div class="row">
+  <div class="small-12 column expanded button custom">
     <% if @user_going %>
-      <%= link_to("You're Going", user_event_path(@user_event.id), method: :get, class: "button attend") %>
+      <%= link_to("Already planning to go...", user_event_path(@user_event.id), method: :get, class: "button expanded custom") %>
     <% else %>
-      <%= link_to("I want to go!", attend_path(@user_event.id), method: :post, class: "button attend") %>
+      <%= link_to("I want to go to this!!!", attend_path(@user_event.id), method: :post, class: "button expanded custom") %>
     <% end %>
-    <!-- End comments -->
   </div>
 </div>
 
@@ -17,24 +18,47 @@
 
 <% if @event_artists.length > 1 %>
   <div class="row">
-    <h3>Artists:</h3>
-      <ul>
-        <% @event_artists.each do |a| %>
-          <li><%= a['Name'] %></li>
-        <% end %>
-      </ul>
+    <div class="small-12 column expanded button custom2">
+      <h2>Artists:</h2>
+    </div>
   </div>
+    <!-- Start doing things from here... -->
+  <% @event_artists.each do |a| %>
+    <div>
+      <div class="small-12 expanded button custom">
+        <%= a['Name'] %>
+      </div>
+    </div>
+  <% end %>
 <br>
 <% end %>
 
+<div class="row">
+  <div class="small-12 column expanded button custom2">
+    <h2>Venue:</h2> 
+  </div>
+</div>
 
-<h3>Venue:</h3> 
+<div class="row">
+  <div class="small-12 expanded button custom">
+    <%= @event_venue['Name'] %> <%= link_to("(Venue Website)", @event_venue['Url'], method: :get) %>
+  </div>
+</div>
 
-<ul>
-  <li><%= @event_venue['Name'] %> <%= link_to("(Venue Website)", @event_venue['Url'], method: :get) %></li>
-  <li><%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></li>
-</ul>
 
-<div><%= link_to("Buy Tickets!", @event_url, method: :get) %></div>
+<div class="row">
+  <div class="small-12 expanded button custom">
+    <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
+
+    <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), @url.html_safe, method: :get) %>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="small-12 expanded button custom">
+    <%= link_to("Buy Tickets!", @event_url, method: :get) %>
+  </div>
+</div>
 
 <hr>

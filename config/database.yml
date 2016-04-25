@@ -7,15 +7,17 @@ default: &default
   timeout: 5000
 
 development:
-  adapter: postgresql
-  database: showup_development
-  username: postgres
-  password: 
+  adapter: sqlite3
+  database: development.sqlite3
   host: localhost
   encoding: UTF8
   pool: 5
   timeout: 5000
 
-test:
-  <<: *default
-  database: showup
+development:
+  adapter: sqlite3
+  database: test.sqlite3
+  host: localhost
+  encoding: UTF8
+  pool: 5
+  timeout: 5000

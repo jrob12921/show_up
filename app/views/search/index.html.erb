@@ -1,35 +1,33 @@
 <div class="row">
-  <h2 class="small-12 columns expanded button custom2">
-    <% if current_user.sign_in_count > 1 %>
-      Welcome back, <%= current_user.name.split(" ").first %>!
-    <% else %>
-      Welcome, <%= current_user.name.split(" ").first %>!
-    <% end %>
-  </h2>
+  <div class="small-12 columns expanded button custom2">
+    <h2>
+      <% if current_user.sign_in_count > 1 %>
+        Welcome Back, <%= current_user.name.split(" ").first %>!
+      <% else %>
+        Welcome, <%= current_user.name.split(" ").first %>!
+      <% end %>
+    </h2>
+  </div>
 </div>
 
 <div class="search_form background_wrapper_1">
   <%= form_tag("/results", method: "get") do %>
-
-    <%= label_tag(:q_name, "Search Artists and Venues by Name:", class: "button reverse expanded") %>
-    <%= text_field_tag(:q_name) %><br>
-
-    <%= submit_tag("Search by Name", class: "custom button") %>
+    <%= submit_tag("Search Artists and Venues by NAME", class: "button reverse expanded") %>
+    <%= text_field_tag(:q_name) %>
   <% end %>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
 </div>
 
 <!-- <div class="background_parallax"></div> -->
 
 <div class="search_form background_wrapper_2">
   <%= form_tag("/results", method: "get") do %>
-    
-    <%= label_tag(:q_zip_code, "Search Events and Venues by Zip Code:", class: "button reverse expanded") %>
-    <%= text_field_tag(:q_zip_code) %><br>
-
-    <%= submit_tag("Search by Zip Code", class: "custom button") %>
+    <%= submit_tag("Search Events and Venues by ZIP", class: "button reverse expanded") %>
+    <%= text_field_tag(:q_zip_code) %>
   <% end %>
+  <br>
   <br>
   <br>
 </div>
@@ -38,18 +36,20 @@
 
 <div class="background_wrapper_3">
 
-  <div class="app_info row">
-    <div class="small-12 column">
+  <div class="row">
+    <div class="small-12 column app_info">
       <h2>Learn More</h2>
     </div>
 
-    <p>Have you been too shy to go to a concert alone?  Well now you don't have to be!</p>
+    <div class= "small-12 columnp app_info_p">
+      <p>Have you been too shy to go to a concert alone?  Well now you don't have to be!</p>
 
-    <p>With Show Up &trade; you can meet before the show!</p>
+      <p>With Show Up &trade; you can meet before the show!</p>
 
-    <p>It's very simple. Search for your favorite artists or venues, and then click "I'm Going." After that, you can find other people going and message them.  Or you can message the whole group of people going.</p>
+      <p>It's very simple. Search for your favorite artists or venues, and then click "I'm Going." After that, you can find other people going and message them.  Or you can message the whole group of people going.</p>
 
-    <p>Never go to a concert alone again!</p>
+      <p>Never go to a concert alone again!</p>
+    </div>
   </div>
 
 </div>

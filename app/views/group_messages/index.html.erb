@@ -1,6 +1,6 @@
 <div class="row">
   <div class="small-12 columns expanded button custom2">
-    <h2><%= @marquee.html_safe %></h2>
+    <h2><%= link_to(@marquee.html_safe, event_path(@event.jb_event_id), method: :get) %></h2>
   </div>
 </div>
 
@@ -12,7 +12,7 @@
 
 <div class="row">
   <div class="small-12 columns expanded button custom2">
-    <h2>Send a Message to Everyone Going:</h2>
+    <h2>Send a Message to Everyone Going to the Show:</h2>
   </div>
 </div>
 
@@ -20,8 +20,10 @@
   <%= ngm.hidden_field :event_id, value: @event.id %>
   <%= ngm.hidden_field :user_id, value: @user.id %>
   <%= ngm.text_area :body, rows: 3, label: false %>
-  <%= ngm.submit :create, value: "Holler", class: "radius button custom"  %>
+  <%= ngm.submit :create, value: "Holler", class: "radius button custom large expanded"  %>
 <% end %>
+
+<hr>
 
 <div class="all_messages">
   <% if @group_messages.present? %>  
@@ -51,7 +53,7 @@
             </div>
           </div>
 
-          <div class="single_message other row">
+          <div class="other row">
             <div class="msg_info small-12 column">
               <strong><em><%= gm.user.name %> @ <%= gm.created_at.strftime("%-I:%M:%S %P") %> on <%= gm.created_at.strftime("%-m/%-d/%y") %></em></strong>
             </div>

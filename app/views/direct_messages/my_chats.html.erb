@@ -1,39 +1,35 @@
-<h2>My Chats</h2>
+<% if @items.present? %>
 
   <% @items.each_with_index do |i, idx| %>
     <% if i[:event_venue].present? %>
-  
+
       <div class="row">
         <div class="small-12 colummns button reverse2">  
           <% if i[:artist_names].length > 1 %>
-            <%= link_to("<%= i[:artist_names].join(", ") %><span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y') %>".html_safe, event_group_messages_path(@user_events[idx].event_id), method: :get) %>
+            <h2><%= link_to("#{i[:artist_names].join(', ')} on #{DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y')}<br>(Group Chat)".html_safe, event_group_messages_path(@user_events[idx].event_id), method: :get) %></h2>
           <% else %>
-            <%= link_to("<%= i[:artist_names][0] %><span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y') %>".html_safe,event_group_messages_path(@user_events[idx].event_id) , method: :get) %>
+            <h2><%= link_to("#{i[:artist_names][0]} on #{DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y')}<br>(Group Chat)".html_safe,event_group_messages_path(@user_events[idx].event_id) , method: :get) %></h2>
           <% end %>
-         
-         <br>
-
-         (Group Chat)
-
         </div>
       </div>
 
 
       <% i[:chat_partners].each do |cp| %>
         <div class="row">
-          <div class="small-12 colums">
-            <%= link_to("#{image_tag cp[:partner_picture]} #{cp[:partner_name]}".html_safe, event_dm_path(i[:event_id], current_user.id, cp[:partner_id]), method: :get, class: "large button expanded reverse") %>
+          <div class="small-12 columns">
+            <!-- It would be nice to put the image tag in here -->
+            <%= link_to("#{cp[:partner_name]}", event_dm_path(i[:event_id], current_user.id, cp[:partner_id]), method: :get, class: "button expanded reverse") %>
           </div>
         </div>
       <% end %>
-
-    <% else %>
-      <div class="row">
-        <div class="small-12 colummns">  
-          You have no chats!
-        </div>
-      </div>
+      <hr>
     <% end %>
-
-        
   <% end %>
+
+<% else %>
+  <div class="row">
+    <div class="small-12 colummns">  
+      You have no chats!
+    </div>
+  </div>      
+<% end %>

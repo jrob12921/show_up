@@ -33,17 +33,22 @@ class EventsController < ApplicationController
       # @artist_ids << a['Id']
     end
 
-    @marquee = "<em>See</em> <strong>#{@artist_names.join(", ")}</strong><br><em>At</em>  <strong>#{@event_venue['Name']}</strong><br><em>On</em> <strong>#{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}</strong>"
+    @marquee = "#{@artist_names.join(", ")} @ #{@event_venue['Name']} on #{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}"
  
      @user_event = UserEvent.find_or_create_by(user_id: @user.id, event_id: @event.id) 
 
      @user_event.attending == true ? @user_going = true : @user_going = false
+
+     @url = "https://www.google.com/maps/dir/Current+Location/#{@event_venue['Address']} #{@event_venue['City']} #{@event_venue['StateCode']} #{@event_venue['ZipCode']}"
+
+     @url.gsub!(' ', '+').gsub!('++','+')
 
     # Ask orlando about this. 
     # There might be a way to use "build" so that the link can exist without creating the record
   end
 
   def event_users
+    @page_header = "Who's Going"
     @event = Event.find(params[:id])
     @users = @event.users
     

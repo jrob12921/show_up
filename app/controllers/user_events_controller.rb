@@ -11,6 +11,7 @@ class UserEventsController < ApplicationController
 
   # my_events page
   def index
+    @page_header = "My Events"
     @user_events = UserEvent.where(user_id: @user.id, attending: true )
     # don't know if i will actually use this
     @jb_event_ids = []
@@ -25,9 +26,13 @@ class UserEventsController < ApplicationController
 
     @artist_names = []
     @jb_events.each do |a|
-      artists = []
-      a[:event_artists].each do |n|
-        artists << n['Name']
+      if a[:event_artists].present?
+        artists = []
+        a[:event_artists].each do |n|
+          artists << n['Name']
+        end
+      else
+        artists = [""]
       end
       @artist_names << artists
     end
@@ -63,6 +68,10 @@ class UserEventsController < ApplicationController
     @group_message = GroupMessage.where(event_id: @event.id, user_id: @user.id)
 
     @user_event.attending == true ? @user_going = true : @user_going = false
+
+    @url = "https://www.google.com/maps/dir/Current+Location/#{@event_venue['Address']} #{@event_venue['City']} #{@event_venue['StateCode']} #{@event_venue['ZipCode']}"
+
+    @url.gsub!(' ', '+').gsub!('++','+')
 
   end
 

@@ -1,12 +1,6 @@
 <div class="row">
-  <div class="small-12 columns botton expanded custom2">
-    <h2><%= @marquee.html_safe %></h2>
-  </div>
-</div>
-
-<div class="row">
-  <div class="small-12 columns buttom expanded reverse2">
-    <h3>Message <%= @other_user.name %>:</h3>
+  <div class="small-12 columns button expanded custom2">
+    <h2><%= link_to(@marquee.html_safe, event_path(@event.jb_event_id), method: :get) %></h2>
   </div>
 </div>
 
@@ -15,8 +9,10 @@
   <%= ndm.hidden_field :sender_id, value: @user.id %>
   <%= ndm.hidden_field :recipient_id, value: @other_user.id %>
   <%= ndm.text_area :body, rows: 3, label: false %>
-  <%= ndm.submit :create, value: "Holler", class: "radius button custom"  %>
+  <%= ndm.submit :create, value: "Holler", class: "radius button custom large expanded"  %>
 <% end %>
+
+<hr>
 
 <div class="all_messages">
   <% if @aggregate_messages.present? %>  
