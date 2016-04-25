@@ -28,7 +28,7 @@ class DirectMessagesController < ApplicationController
 
 
     @other_user = User.find(params[:recipient_id])
-    @page_header = "<%= image_tag @other_user.image %> <%= @other_user.name.split(' ').first"
+    @page_header = "<%= image_tag @other_user.image %> <%= @other_user.name.split(' ').first".html_safe
     @sent_messages = DirectMessage.where(event_id: @event.id, sender_id: @user.id, recipient_id: @other_user.id)
     @received_messages = DirectMessage.where(event_id: @event.id, sender_id: @other_user.id, recipient_id: @user.id)
     @aggregate_messages = []

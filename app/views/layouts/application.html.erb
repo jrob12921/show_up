@@ -18,7 +18,7 @@
   <%= display_flash_messages %>
 
   <nav class="top-bar" id="main_nav">
-    <span class="page_header"><%= @page_header.html_safe ||= "Show Up" %></span>
+    <span class="page_header"><%= @page_header ||= "Show Up" %></span>
     <div class="top-bar-right" id="prof_pic">
       <ul class="dropdown menu" data-dropdown-menu>
         <li>
