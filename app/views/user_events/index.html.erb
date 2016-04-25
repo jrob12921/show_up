@@ -5,9 +5,9 @@
     <% @jb_events.each_with_index do |j, i| %>
       
         <div class="my_events_container">
-          
-          <div class="row event_info">
-            <a href="<%= event_path(j[:jb_event_id]) %>" class="large button custom expanded">
+
+          <a href="<%= event_path(j[:jb_event_id]) %>" class="large button custom expanded">
+            <div class="row event_info">
               <div class="small-4 columns">
                 <% if j[:event_artists].length > 1 %>
 
@@ -30,21 +30,19 @@
               <div class="small-4 columns">
                 <%= DateTime.parse(j[:event_date]).strftime("%-m/%-d/%y") %>
               </div>
-            </a>
-          </div>
+            </div>
+          </a>
 
           <div class="row">
             <div class="small-6 columns">
-              <%= link_to("See the Group Chat!!", event_group_messages_path(@user_events[i].event_id), method: :get, class: "button custom") %>
+              <%= link_to("See the Group Chat!!", event_group_messages_path(@user_events[i].event_id), method: :get, class: "button reverse") %>
             </div>
 
             <div class="small-6 columns">
-              <%= link_to("Find Out Who's Going", event_users_path(@user_events[i].event_id), method: :post, class: "button custom") %>
+              <%= link_to("Find Out Who's Going", event_users_path(@user_events[i].event_id), method: :post, class: "button reverse") %>
             </div>
           </div>
-        </div>
-
-      <br>
+        </div>  
     <% end %>
 
 <% else %>

@@ -1,34 +1,28 @@
 <div class="event_bg_container">
   <div class="row">
     <div class="small-12 columns">
-      <h2>Congrats!</h2>
+      <h2>Congrats!  You're seeing:</h2>
     </div>
   </div>
 
   <div class="row">
     <div class="small-12 columns">
-      <h3>You're seeing:</h3>
-      <ul>
-        <% @artist_names.each do |a| %>
-          <li><%= a %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
+      <%= @artist_names.join(", ") %>
+      <span> @ </span>
+      <%= @event_venue['Name'] %>
+      <span> on </span>
+      <%= DateTime.parse(@event_date).strftime("%-m/%-d/%y") %>
 
-
-  <div class="row">
-    <div class="small-12 columns">
-      On: <%= DateTime.parse(@event_date).strftime("%-m/%-d/%y") %>
     </div>
   </div>
 
   <div class="row">
-    <div class="small-12 columns">
-      At: <%= @event_venue['Name'] %>
-        <ul>
-          <li><%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></li>
-        </ul>
+    <div class="small-8 columns">
+      <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
+    </div>
+
+    <div class="small-4 columns">
+      <%= link_to("Google Maps", "http://maps.google.com/?q=@event_venue['Address'] %>,<%= @event_venue['City'] %>,<%= @event_venue['StateCode'] %>,<%= @event_venue['ZipCode']") %>
     </div>
   </div>
 

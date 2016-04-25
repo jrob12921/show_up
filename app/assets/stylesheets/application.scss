@@ -40,7 +40,7 @@
     font-style: normal;
   }
 
-  @import url(https://fonts.googleapis.com/css?family=Boogaloo);
+  @import url(https://fonts.googleapis.com/css?family=Righteous);
 
   html {
     height: 100%;
@@ -56,7 +56,7 @@
   }
 
   h2 {
-    font-family: 'Boogaloo', cursive;
+    font-family: 'Righteous', cursive;
   }
 
   .top-bar-right {
@@ -217,8 +217,13 @@
   }
 
   .custom {
-      background: linear-gradient(to right, $magenta, $orange);
-      margin-bottom: 1px;
+    background: linear-gradient(to right, $magenta, $orange);
+    margin-bottom: 1px;
+  }
+
+  .reverse {
+    background: linear-gradient(to right, $orange, $magenta);
+    margin-bottom: 1px;
   }
 
   .event_bg_container {
@@ -227,7 +232,7 @@
   }
 
   .event_info {
-  
+    padding-bottom: 4px;
   }
 
   .my_events_container {
