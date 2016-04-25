@@ -11,6 +11,7 @@ class UserEventsController < ApplicationController
 
   # my_events page
   def index
+    @page_header = "My Events"
     @user_events = UserEvent.where(user_id: @user.id, attending: true )
     # don't know if i will actually use this
     @jb_event_ids = []

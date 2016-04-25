@@ -1,6 +1,6 @@
 <div class="row">
   <div class="small-12 columns expanded button custom2">
-    <h2><%= @marquee.html_safe %></h2>
+    <h2><%= link_to(@marquee.html_safe, events_path(@event.jb_event_id), method: :get) %></h2>
   </div>
 </div>
 
