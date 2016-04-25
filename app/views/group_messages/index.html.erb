@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="small-12 columns">
+  <div class="small-12 columns expanded button custom2">
     <h2><%= @marquee.html_safe %></h2>
   </div>
 </div>
@@ -10,7 +10,11 @@
   </div>
 </div>
 
-<h2>Send a Message to Everyone Going:</h2>
+<div class="row">
+  <div class="small-12 columns expanded button custom2">
+    <h2>Send a Message to Everyone Going:</h2>
+  </div>
+</div>
 
 <%= form_for :group_message, remote: true do |ngm| %>
   <%= ngm.hidden_field :event_id, value: @event.id %>
@@ -24,30 +28,33 @@
 
     <% @group_messages.reverse_each do |gm| %>
       <% if gm.user.id == @user.id %>
-
-        <div class="single_message mine row">
-          <div class="msg_body small-12 column">
-            <%= gm.body %>
+        
+        <div class="single_message">
+          <div class="mine row">
+            <div class="msg_body small-12 column">
+              <%= gm.body %>
+            </div>
           </div>
-        </div>
 
-        <div class="single_message mine row">
-          <div class="msg_info small-12 column">
-            <strong><em>Yours Truly @ <%= gm.created_at.strftime("%-I:%M:%S %P") %> on <%= gm.created_at.strftime("%-m/%-d/%y") %></em></strong>
+          <div class="mine row">
+            <div class="msg_info small-12 column">
+              <strong><em>Yours Truly @ <%= gm.created_at.strftime("%-I:%M:%S %P") %> on <%= gm.created_at.strftime("%-m/%-d/%y") %></em></strong>
+            </div>
           </div>
         </div>
 
       <% else %>
-
-        <div class="single_message other row">
-          <div class="msg_body small-12 column">
-            <%= gm.body %>
+        <div class="single_message">
+          <div class="other row">
+            <div class="msg_body small-12 column">
+              <%= gm.body %>
+            </div>
           </div>
-        </div>
 
-        <div class="single_message other row">
-          <div class="msg_info small-12 column">
-            <strong><em><%= gm.user.name %> @ <%= gm.created_at.strftime("%-I:%M:%S %P") %> on <%= gm.created_at.strftime("%-m/%-d/%y") %></em></strong>
+          <div class="single_message other row">
+            <div class="msg_info small-12 column">
+              <strong><em><%= gm.user.name %> @ <%= gm.created_at.strftime("%-I:%M:%S %P") %> on <%= gm.created_at.strftime("%-m/%-d/%y") %></em></strong>
+            </div>
           </div>
         </div>
       <% end %>

@@ -96,7 +96,7 @@
   }
 
   .single_message {
-    height: 100%;
+    border-bottom: 1px solid black
   }
 
   .mine {
@@ -221,10 +221,6 @@
   .event_bg_container {
     background-image: url("/assets/yellow_light_bg");
     background-size: 100%;
-  }
-
-  .congrats {
-    color: $dark_blue;
   }
 
   .event {

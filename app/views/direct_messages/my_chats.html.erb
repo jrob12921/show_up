@@ -1,14 +1,14 @@
 <h2>My Chats</h2>
 
-  <% @items.each do |i| %>
+  <% @items.each_with_index do |i, idx| %>
     <% if i[:event_venue].present? %>
   
       <div class="row">
         <div class="small-12 colummns button reverse2">  
           <% if i[:artist_names].length > 1 %>
-            <%= i[:artist_names].join(", ") %> 
+            <%= link_to( "<%= i[:artist_names].join(", ") %><span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y') %>", event_group_messages_path(@user_events[idx].event_id), method: :get) %> %> 
           <% else %>
-            <%= i[:artist_names][0] %> 
+            <%= link_to( "<%= i[:artist_names][0] %><span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime('%-m/%-d/%y') %>",event_group_messages_path(@user_events[idx].event_id) , method: :get) %>
           <% end %>
           
          <span> @ </span><%= i[:event_venue]['Name'] %><span> on </span><%= DateTime.parse(i[:event_date]).strftime("%-m/%-d/%y") %>
@@ -28,8 +28,6 @@
           </div>
         </div>
       <% end %>
-
-      <hr>
 
     <% else %>
       <div class="row">

@@ -1,22 +1,14 @@
 <div class="row">
-  <div class="small-12 columns congrats">
-    <h2>Congrats!  You're seeing:</h2>
-  </div>
-</div>
-
-<div class="row">
   <div class="small-12 columns large button expanded reverse2">
-    <span class="event"><%= @artist_names.join(", ") %> @ <%= @event_venue['Name'] %> on <%= DateTime.parse(@event_date).strftime('%-m/%-d/%y') %></span>
+    <h2><%= @artist_names.join(", ") %> @ <%= @event_venue['Name'] %> on <%= DateTime.parse(@event_date).strftime('%-m/%-d/%y') %></h2>
   </div>
 </div>
 
 <div class="row">
-  <div class="small-8 columns large button custom expanded">
+  <div class="small-12 columns large button custom expanded">
     <span class"address"><%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></span>
-  </div>
 
-  <div class="small-4 columns">
-    <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), "http://maps.google.com/?q=<%= @event_venue['Address'] %>,<%= @event_venue['City'] %>,<%= @event_venue['StateCode'] %>,<%= @event_venue['ZipCode']", method: :get) %>
+    <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), "http://maps.google.com/?q=<%= @event_venue['Address'] %>,<%= @event_venue['City'] %>,<%= @event_venue['StateCode'] %>,<%= @event_venue['ZipCode']".html_safe, method: :get) %>
   </div>
 </div>
 

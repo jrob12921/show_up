@@ -35,6 +35,7 @@ class UserEventsController < ApplicationController
   end
 
   def show
+    @page_header = "You're Seeing:"
     @user_event = UserEvent.find_by(event_id: @event.id, user_id: @user.id)
 
     # @user_event.update(attending: true)
