@@ -33,7 +33,7 @@ class EventsController < ApplicationController
       # @artist_ids << a['Id']
     end
 
-    @marquee = "<em>See</em> <strong>#{@artist_names.join(", ")}</strong><br><em>At</em>  <strong>#{@event_venue['Name']}</strong><br><em>On</em> <strong>#{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}</strong>"
+    @marquee = "#{@artist_names.join(", ")} @ #{@event_venue['Name']} on #{DateTime.parse(@event_date).strftime("%-m/%-d/%y")}"
  
      @user_event = UserEvent.find_or_create_by(user_id: @user.id, event_id: @event.id) 
 

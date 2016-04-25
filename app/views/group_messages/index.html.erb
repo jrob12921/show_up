@@ -12,7 +12,7 @@
 
 <div class="row">
   <div class="small-12 columns expanded button custom2">
-    <h2>Send a Message to Everyone Going:</h2>
+    <h2>Send a Message to Everyone Going to the Show:</h2>
   </div>
 </div>
 
@@ -20,8 +20,10 @@
   <%= ngm.hidden_field :event_id, value: @event.id %>
   <%= ngm.hidden_field :user_id, value: @user.id %>
   <%= ngm.text_area :body, rows: 3, label: false %>
-  <%= ngm.submit :create, value: "Holler", class: "radius button custom"  %>
+  <%= ngm.submit :create, value: "Holler", class: "radius button custom large expanded"  %>
 <% end %>
+
+<hr>
 
 <div class="all_messages">
   <% if @group_messages.present? %>  
@@ -31,7 +33,7 @@
         
         <div class="single_message">
           <div class="mine row">
-            <div class="msg_body small-12 column">
+            <div class="msg_body small-2 column">
               <%= gm.body %>
             </div>
           </div>

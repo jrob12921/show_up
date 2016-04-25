@@ -100,7 +100,7 @@
   }
 
   .mine {
-    background: linear-gradient(to right, $light_green, $turkuaz);
+    background: linear-gradient(to right, $magenta, $orange);
     text-align: right;
 
     .img_cont {
@@ -109,7 +109,7 @@
   }
 
   .other {
-    background: linear-gradient(to right, $turkuaz, $light_green);
+    background: linear-gradient(to right, $orange, $magenta);
 
     .img_cont {
       padding-left: 0;
@@ -170,7 +170,6 @@
   .background_wrapper_2 {
     background-image: url("/assets/concert_bg_1.jpg");
     background-size: cover;
-    height: 100px;
   }
 
   .app_info{
@@ -184,8 +183,6 @@
   .search_form form label {
       font-size: 16px;
       color: white;
-      text-shadow: 2px 2px 3px $dark_blue;
-      -webkit-text-stroke: .01em black;
   }
 
   .users_image {

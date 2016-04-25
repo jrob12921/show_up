@@ -1,11 +1,13 @@
 <div class="row">
-  <h2 class="small-12 columns expanded button custom2">
-    <% if current_user.sign_in_count > 1 %>
-      Welcome back, <%= current_user.name.split(" ").first %>!
-    <% else %>
-      Welcome, <%= current_user.name.split(" ").first %>!
-    <% end %>
-  </h2>
+  <div class="small-12 columns expanded button custom2">
+    <h2>
+      <% if current_user.sign_in_count > 1 %>
+        Welcome back, <%= current_user.name.split(" ").first %>!
+      <% else %>
+        Welcome, <%= current_user.name.split(" ").first %>!
+      <% end %>
+    </h2>
+  </div>
 </div>
 
 <div class="search_form background_wrapper_1">
@@ -16,10 +18,9 @@
 
     <%= submit_tag("Search by Name", class: "custom button") %>
   <% end %>
-<br>
-<br>
 </div>
-
+<br>
+<br>
 <!-- <div class="background_parallax"></div> -->
 
 <div class="search_form background_wrapper_2">
@@ -30,9 +31,9 @@
 
     <%= submit_tag("Search by Zip Code", class: "custom button") %>
   <% end %>
-  <br>
-  <br>
 </div>
+<br>
+<br>
 
 <!-- <div class="background_parallax_2"></div> -->
 

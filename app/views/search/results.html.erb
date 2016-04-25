@@ -1,11 +1,18 @@
 <% if @artist_results.present? %>
 
-  <h3>Artists:</h3>
-  <ol>  
-    <% @artist_results.each do |a| %>
-      <li><%= link_to(a[:artist_name], artist_events_path(a[:jb_artist_id]), method: :get) %></li>
-    <% end %>
-  </ol>
+  <div class="row">
+    <div class="small-12 column expanded button custom2">
+      <h2>Artists:</h2>
+    </div>
+  </div>
+
+  <% @artist_results.each do |a| %>
+    <div class="row">
+      <div class="small-12 column expanded button custom">
+        <%= link_to(a[:artist_name], artist_events_path(a[:jb_artist_id]), method: :get) %>
+      </div>
+    </div>
+  <% end %>
 
 <% end %>
 
@@ -13,39 +20,65 @@
 <!-- Display Venue Results -->
 <% if @venue_results.present? %>
 
-  <h3>Venues:</h3>
-  <ol>  
-    <% @venue_results.each do |v| %>
-      <li><%= link_to(v[:venue_name], venue_events_path(v[:jb_venue_id]), method: :get) %></li>
-    <% end %>
-  </ol>
+  <div class="row">
+    <div class="small-12 column expanded button custom2">
+      <h2>Venues:</h2>
+    </div>
+  </div>
+
+  <% @venue_results.each do |v| %>
+    <div class="row">
+      <div class="small-12 column expanded button custom">
+        <%= link_to(v[:venue_name], venue_events_path(v[:jb_venue_id]), method: :get) %>
+      </div>
+    </div>
+  <% end %>
 
 <% end %>
 
 <!-- Display Events Results -->
 <% if @event_results.present? %>
 
-  <h3>Events:</h3>
-  <ol>
-    <% @event_results.each do |e| %>
-      <li>
-        <ul>
-          <li><%= link_to("View This Event", event_path(e[:jb_event_id]), method: :get) %></li>
-          <li>Date: <%= DateTime.parse(e[:event_date]).strftime("%-m/%-d%y") %></li>
-          <!-- Possible to put in link to venue events?  Does search give me ID? -->
-          <li>Venue: <%= link_to(e[:event_venue]['Name'], venue_events_path(e[:event_venue]['Id']), method: :get)  %> </li>
-          <li>Artists:
-            <ol>
-              <% e[:event_artists].each do |a| %>
-                <li><%= link_to(a['Name'], artist_events_path(a['Id']), methood: :get) %></li>
-              <% end %>
-            </ol>
-          </li>
-          <li><%= link_to("Buy Tickets", "#{e[:event_url]}") %></li>
-        </ul>
-      </li>
-      <br>
-    <% end %>
-  </ol>
+  <div class="row">
+    <div class="small-12 column expanded button custom2">
+      <h2>Evnts:</h2>
+    </div>
+  </div>
+
+  <% @event_results.each do |e| %>
+    <div class="row">
+      <div class="small-12 column expanded button custom">
+        <%= link_to("#{@artist_names} @ #{e[:event_venue]['Name']} on #{DateTime.parse(e[:event_date]).strftime('%-m/%-d%y')}", event_path(e[:jb_event_id]), method: :get) %>
+      </div>
+    </div>
+
+   <div class="row">
+      <div class="small-12 column expanded button custom"> 
+        <%= link_to("Venue Website", venue_events_path(e[:event_venue]['Id']), method: :get)  %> 
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 column expanded button custom"> 
+        Artists:
+      </div>
+    </div>
+          
+    <% e[:event_artists].each do |a| %>
+      <div class="row">
+        <div class="small-12 column expanded button custom">
+          <%= link_to(a['Name'], artist_events_path(a['Id']), methood: :get) %>
+        </div>
+      </div>
+    <% end %>   
+
+    <div class="row">
+      <div class="small-12 column expanded button custom">
+        <%= link_to("Buy Tickets", "#{e[:event_url]}") %>
+      </div>
+    </div>
+
+    <hr>
+  <% end %>
 
 <% end %>
