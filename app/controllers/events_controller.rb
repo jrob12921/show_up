@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   end
 
   def event_users
-    @page_header = ""
+    @page_header = "Who's Going"
     @event = Event.find(params[:id])
     @users = @event.users
     

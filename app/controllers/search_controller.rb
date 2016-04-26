@@ -10,10 +10,10 @@ class SearchController < ApplicationController
   def results
     if params[:q_name].present?
       @name = params[:q_name]
-      @name_results = Rails.cache.fetch(:name_results, expires_in: 24.hours) do
-        ::Search.new.search_by_name(@name)
-      end
-      # @name_results = ::Search.new.search_by_name(@name)
+      # @name_results = Rails.cache.fetch(:name_results, expires_in: 24.hours) do
+      #   ::Search.new.search_by_name(@name)
+      # end
+      @name_results = ::Search.new.search_by_name(@name)
 
       @artist_results = @name_results[0]
       @venue_results = @name_results[1]
@@ -26,10 +26,10 @@ class SearchController < ApplicationController
 
       elsif valid_zip?(@zip_code)
 
-        @zip_results = Rails.cache.fetch(:zip_results, expires_in: 24.hours) do
-         ::Search.new.search_by_zip(@zip_code)
-        end
-        # @zip_results = ::Search.new.search_by_zip(@zip_code)
+        # @zip_results = Rails.cache.fetch(:zip_results, expires_in: 24.hours) do
+        #  ::Search.new.search_by_zip(@zip_code)
+        # end
+        @zip_results = ::Search.new.search_by_zip(@zip_code)
 
         @venue_results = @zip_results[0]
         @event_results = @zip_results[1]
