@@ -105,14 +105,15 @@ class Search
 
   def self.get_api_key
     api_keys = [
-      # ENV['JAMBASE_API_KEY'],
-      # ENV['JAMBASE_API_KEY2'],
-      # ENV['JAMBASE_API_KEY3'],
-      # ENV['JAMBASE_API_KEY4'],
+      ENV['JAMBASE_API_KEY'],
+      ENV['JAMBASE_API_KEY2'],
+      ENV['JAMBASE_API_KEY3'],
+      ENV['JAMBASE_API_KEY4'],
       ENV['JAMBASE_API_KEY5'],
       ENV['JAMBASE_API_KEY6'],
       ENV['JAMBASE_API_KEY7'],
-      ENV['JAMBASE_API_KEY8']
+      ENV['JAMBASE_API_KEY8'],
+      ENV['JAMBASE_API_KEY9']
     ]
 
     api_keys.sample
