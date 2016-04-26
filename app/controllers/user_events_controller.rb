@@ -67,7 +67,9 @@ class UserEventsController < ApplicationController
 
     @user_event.attending == true ? @user_going = true : @user_going = false
 
-    @url = "https://www.google.com/maps/place/#{@event_venue['Address']}, #{@event_venue['City']}, #{@event_venue['StateCode']} #{@event_venue['ZipCode']}".gsub!(' ', '+').gsub!('++','+')
+    @url = "https://www.google.com/maps/dir/Current+Location/#{@event_venue['Address']} #{@event_venue['City']} #{@event_venue['StateCode']} #{@event_venue['ZipCode']}"
+
+    @url.gsub!(' ', '+').gsub!('++','+')
 
   end
 

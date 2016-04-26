@@ -39,13 +39,16 @@ class EventsController < ApplicationController
 
      @user_event.attending == true ? @user_going = true : @user_going = false
 
-     @url = "https://www.google.com/maps/place/#{@event_venue['Address']}, #{@event_venue['City']}, #{@event_venue['StateCode']} #{@event_venue['ZipCode']}".gsub!(' ', '+').gsub!('++','+')
+     @url = "https://www.google.com/maps/dir/Current+Location/#{@event_venue['Address']} #{@event_venue['City']} #{@event_venue['StateCode']} #{@event_venue['ZipCode']}"
+
+     @url.gsub!(' ', '+').gsub!('++','+')
 
     # Ask orlando about this. 
     # There might be a way to use "build" so that the link can exist without creating the record
   end
 
   def event_users
+    @page_header = ""
     @event = Event.find(params[:id])
     @users = @event.users
     
