@@ -31,7 +31,7 @@ class UserEventsController < ApplicationController
         a[:event_artists].each do |n|
           artists << n['Name']
         else
-          artsits << [""]
+          artists << [""]
         end
         @artist_names << artists
       end
