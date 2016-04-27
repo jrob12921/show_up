@@ -15,3 +15,5 @@ Future Features:
 7) Show mutual past shows when you click on other users
 
 8) Better API ||= Current API
+
+9) Chat notifications (both DM and GM)
