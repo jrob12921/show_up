@@ -34,8 +34,7 @@ class UserEventsController < ApplicationController
       else
         artists = [""]
       end
-        @artist_names << artists
-      end
+      @artist_names << artists
     end
 
   end
