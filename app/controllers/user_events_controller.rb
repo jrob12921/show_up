@@ -26,10 +26,12 @@ class UserEventsController < ApplicationController
 
     @artist_names = []
     @jb_events.each do |a|
-      unless a[:event_artists].nil?
+      if a[:event_artists].present?
         artists = []
         a[:event_artists].each do |n|
           artists << n['Name']
+        else
+          artsits << [""]
         end
         @artist_names << artists
       end
