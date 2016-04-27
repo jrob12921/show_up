@@ -5,7 +5,7 @@
       <a href='<%= event_path(j[:jb_event_id]) %>' class="large button custom2 expanded">
         <div class="row event_info">
           <div class="small-12 columns">
-            <h2><%= @artist_names %></h2>
+            <h2><%= @artist_names[i].join(', ') %>  %></h2>
           </div>
         </div>
       </a>
