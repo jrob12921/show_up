@@ -30,6 +30,7 @@ class UserEventsController < ApplicationController
         artists = []
         a[:event_artists].each do |n|
           artists << n['Name']
+        end
         else
           artists << [""]
         end
