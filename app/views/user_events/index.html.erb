@@ -14,11 +14,11 @@
 
         <div class="row">
           <div class="small-12 columns">
-            <%= link_to("See the Group Chat", event_group_messages_path(@user_events[i].event_id), method: :get, class: "button large expanded custom") %>
+            <%= link_to("See the Group Chat", event_group_messages_path(@user_events[i].event_id), method: :get, class: "button expanded custom") %>
           </div>
 
           <div class="small-12 columns">
-            <%= link_to("See Who's Going", event_users_path(@user_events[i].event_id), method: :get, class: "button large expanded custom") %>
+            <%= link_to("See Who's Going", event_users_path(@user_events[i].event_id), method: :get, class: "button expanded custom") %>
           </div>
         </div>
 

@@ -12,9 +12,8 @@
 
 <div class="search_form background_wrapper_1">
   <%= form_tag("/results", method: "get") do %>
-    <%= text_field_tag(:q_name) %>
-
     <%= submit_tag("Search Artists and Venues by NAME", class: "button reverse expanded") %>
+    <%= text_field_tag(:q_name) %>
   <% end %>
   <br>
   <br>
@@ -25,10 +24,8 @@
 
 <div class="search_form background_wrapper_2">
   <%= form_tag("/results", method: "get") do %>
-    
-    <%= text_field_tag(:q_zip_code) %>
-
     <%= submit_tag("Search Events and Venues by ZIP", class: "button reverse expanded") %>
+    <%= text_field_tag(:q_zip_code) %>
   <% end %>
   <br>
   <br>
@@ -44,13 +41,15 @@
       <h2>Learn More</h2>
     </div>
 
-    <p>Have you been too shy to go to a concert alone?  Well now you don't have to be!</p>
+    <div class= "small-12 columnp app_info_p">
+      <p>Have you been too shy to go to a concert alone?  Well now you don't have to be!</p>
 
-    <p>With Show Up &trade; you can meet before the show!</p>
+      <p>With Show Up &trade; you can meet before the show!</p>
 
-    <p>It's very simple. Search for your favorite artists or venues, and then click "I'm Going." After that, you can find other people going and message them.  Or you can message the whole group of people going.</p>
+      <p>It's very simple. Search for your favorite artists or venues, and then click "I'm Going." After that, you can find other people going and message them.  Or you can message the whole group of people going.</p>
 
-    <p>Never go to a concert alone again!</p>
+      <p>Never go to a concert alone again!</p>
+    </div>
   </div>
 
 </div>

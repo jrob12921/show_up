@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="small-12 columns large button expanded reverse2">
+  <div class="small-12 columns large button expanded custom left">
     <h2><%= @artist_names.join(', ') %> @ <%= @event_venue['Name'] %> on <%= DateTime.parse(@event_date).strftime('%-m/%-d/%y') %></h2>
   </div>
 </div>
 
 <div class="row">
-  <div class="small-12 columns large button custom expanded">
-    <span class"address"><%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %></span>
+  <div class="small-12 columns button custom expanded">
+    <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
 
     <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), @url.html_safe, method: :get) %>
   </div>
@@ -16,30 +16,30 @@
 
 <div class="row">
   <div class="small-12 columns">
-    <%= link_to("Event Group Chat", event_group_messages_path(@event.id), method: :get, class: "large button custom expanded") %>     
+    <%= link_to("Event Group Chat", event_group_messages_path(@event.id), method: :get, class: "left button custom expanded") %>     
   </div>
 </div>
 
 <div class="row">
   <div class="small-12 columns">
-    <%= link_to("Find Out Who's Going", event_users_path(@event.id), method: :post, class: "large button custom expanded") %>     
+    <%= link_to("Find Out Who's Going", event_users_path(@event.id), method: :post, class: "left button custom expanded") %>     
   </div>
 </div>
 
 <div class="row">
   <div class="small-12 columns">
-    <%= link_to("Buy Tickets!", @event_url, method: :post, class: "large button custom expanded") %>     
+    <%= link_to("Buy Tickets!", @event_url, method: :post, class: "left button custom expanded") %>     
   </div>
 </div>
 
 <div class="row">
   <div class="small-12 columns">
-    <%= link_to("Venue Website", @event_venue['Url'], method: :post, class: "large button custom expanded") %>     
+    <%= link_to("Venue Website", @event_venue['Url'], method: :post, class: "left button custom expanded") %>     
   </div>
 </div>
 
 <div class="row">
   <div class="small-12 columns">
-    <%= link_to("I Can't Go Anymore", unattend_path(params[:id]), method: :post, class: "large button custom expanded") %>    
+    <%= link_to("I Can't Go Anymore", unattend_path(params[:id]), method: :post, class: "left button custom expanded") %>    
   </div>
 </div>
