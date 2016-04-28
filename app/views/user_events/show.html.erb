@@ -1,14 +1,12 @@
 <div class="row">
-  <div class="small-12 columns large button expanded custom left">
+  <div class="small-12 columns large button expanded custom">
     <h2><%= @artist_names.join(', ') %> @ <%= @event_venue['Name'] %> on <%= DateTime.parse(@event_date).strftime('%-m/%-d/%y') %></h2>
   </div>
 </div>
 
 <div class="row">
-  <div class="small-12 columns button custom expanded">
-    <%= @event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] %>
-
-    <%= link_to(image_tag("/assets/maps_icon.png", class: "gmaps"), @url.html_safe, method: :get) %>
+  <div class="small-12 columns">
+    <%= link_to(@event_venue['Address'] %><br><%= @event_venue['City'] %>, <%= @event_venue['StateCode'] %> <%= @event_venue['ZipCode'] image_tag("/assets/maps_icon.png", class: "gmaps") , @url.html_safe, method: :get, class: " left button custom expanded") %>
   </div>
 </div>
 
