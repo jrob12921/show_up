@@ -104,7 +104,7 @@ class Search
   private
 
   def self.get_api_key
-    Rails.application.secrets[:jambase_api_keys].sample
+    Rails.application.secrets.jambase_api_keys.sample
   end
 
 
