@@ -1,0 +1,19 @@
+Future Features:
+
+1) Search Pagination
+
+2) Follow Bands and be notified of shows
+
+3) Tinder-ization
+
+4) Add Date Search Filter
+
+5) Add Radius Search Filter (for searching with ZIP)
+
+6) Search City and have it process as ZIP (there's a gem for that...)
+
+7) Show mutual past shows when you click on other users
+
+8) Better API ||= Current API
+
+9) Chat notifications (both DM and GM)
